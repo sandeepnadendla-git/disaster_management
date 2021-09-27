@@ -1,18 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import LogIn from './LogIn'
 
-function App() {
-  return (
-   <div class="logPage">
-     <form>
-     <input type={Text} name="login" placeholder="Enter User id"></input>
-     <br></br>
-       <input type="password" name="Password" placeholder="Enter password"></input>
-       <br></br>
-
-     </form>
-   </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <div>
+        <LogIn/>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
