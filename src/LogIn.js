@@ -2,23 +2,77 @@ import React, { Component } from 'react'
 import "./Login.css"
 
 class LogIn extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      password: '',
+      error: '',
+    };
+
+    this.handlePassChange = this.handlePassChange.bind(this);
+    this.handleUserChange = this.handleUserChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.dismissError = this.dismissError.bind(this);
+  }
+
+  dismissError() {
+    this.setState({ error: '' });
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+
+    if (this.state.username != "Group2@nwmissouri.edu" && this.state.password != "Pass") {
+      alert("Incorrect Username and password");
+    }
+    else{
+      alert("Login Successfull")
+    }
+
+  
+    return this.setState({ error: '' });
+  }
+
+  handleUserChange(evt) {
+    this.setState({
+      username: evt.target.value,
+    });
+  };
+
+  handlePassChange(evt) {
+    this.setState({
+      password: evt.target.value,
+    });
+  }
+
+
   render() {
     return (
 
+      
       <div class="login-wrap">
         <div class="login-html">
           <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label for="tab-1" class="tab" >Sign In</label>
           <input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab">Sign Up</label>
           <div class="login-form">
-            <form>
+            <form onSubmit={this.handleSubmit}>
+              {
+                this.state.error &&
+                <h3 data-test="error" onClick={this.dismissError}>
+                  <button onClick={this.dismissError}>✖</button>
+                  {this.state.error}
+                </h3>
+              }
               <div class="sign-in-htm">
                 <div class="group">
                   <label for="user" class="label">Username</label>
-                  <input id="user" type="text" class="input" required />
+                  <input id="user" type="text" name="username" class="input" data-test="username" value={this.state.username} onChange={this.handleUserChange} required />
                 </div>
                 <div class="group">
                   <label for="pass" class="label">Password</label>
-                  <input id="pass" type="password" class="input" data-type="password" required />
+                  <input id="pass" type="password" class="input" data-type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} required />
                 </div>
                 <div class="group">
                   <input id="check" type="checkbox" class="check" />
