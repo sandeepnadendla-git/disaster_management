@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import React, { Component } from 'react'
 import "./Login.css"
 
@@ -24,11 +25,15 @@ class LogIn extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
 
-    if (this.state.username != "Group2@nwmissouri.edu" && this.state.password != "Pass") {
-      alert("Incorrect Username and password");
-    }
+    if (this.state.username == "Group2@nwmissouri.edu" && this.state.password == "Pass") {
+     alert("Login success");
+    }   
+    else if (this.state.username == "disaster@nwmissouri.edu" && this.state.password == "secret") {
+      alert("Login success");
+     }    
     else{
-      alert("Login Successfull")
+      alert("Incorrect Username and password");
+     
     }
 
   
