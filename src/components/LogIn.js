@@ -32,11 +32,38 @@ class LogIn extends Component {
 
       this.props.history.push('/dashboard');
     }
-    else if (this.state.username !== "new@nwmissouri.edu" && this.state.password !== "password") {
-      alert("Incorrect Username and password");
+    else if (this.state.username === "balaji@nwmissouri.edu" && this.state.password === "12345") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
+    }
+    else if (this.state.username === "goutham@nwmissouri.edu" && this.state.password === "1234pass") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
+    }
+    else if (this.state.username === "pariveshita@nwmissouri.edu" && this.state.password === "group2") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
+    }
+    else if (this.state.username === "San@nwmissouri.edu" && this.state.password === "secret") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
+    }
+    else if (this.state.username === "manisha@nwmissouri.edu" && this.state.password === "password") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
+    }
+    else if (this.state.username === "nandini@nwmissouri.edu" && this.state.password === "nandini") {
+      console.log("jhugytfrdtyfy")
+
+      this.props.history.push('/dashboard');
     }
     else {
-      alert("Login Successfull");
+      alert("Incorrect Username and password");
     }
     return this.setState({ error: '' });
   }
