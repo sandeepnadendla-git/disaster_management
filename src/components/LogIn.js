@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React, { Component } from 'react'
-import "./Login.css";
+import "../css/Login.css";
 
 
 class LogIn extends Component {
@@ -27,7 +27,7 @@ class LogIn extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    if (this.state.username == "Group2@nwmissouri.edu" && this.state.password === "Pass") {
+    if (this.state.username === "Group2@nwmissouri.edu" && this.state.password === "Pass") {
       console.log("jhugytfrdtyfy")
 
       this.props.history.push('/dashboard');

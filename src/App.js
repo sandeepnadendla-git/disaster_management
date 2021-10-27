@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter,Switch } from 'react-router-dom';
-import LogIn from './LogIn'
-import Dashboard from './Dashboard'
+import LogIn from './components/LogIn'
+import Dashboard from './components/Dashboard'
 
 export class App extends Component {
   render() {
