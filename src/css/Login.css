@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	height:100%;
 	position:absolute;
-	padding:50px 70px 50px 70px;
+	padding:30px 60px 50px 55px;
 	/* background:rgba(40,57,101,.9); */
 }
 .login-html .sign-in-htm,
@@ -157,4 +157,38 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
 	text-align:center;
+}
+
+/***************** Sandeep *********************/
+
+.Sgroup{
+    width: 45%;
+    margin: 2%;
+    font-size: initial !important;
+    float: left;
+    border-radius: 5px;
+}
+
+.Sgroup input{
+	border-radius: 5px;
+	border:none;
+}
+
+.Bgroup .button{
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px 161px 4px 153px;
+    color: white;
+}
+.Bgroup .button:hover{
+    background-color: orange;
+
+}
+
+.impFld{
+	color: red;
+    font-size: 18px;
+    padding: 4px;
 }

@@ -100,11 +100,11 @@ class LogIn extends Component {
                 }
                 <div class="sign-in-htm">
                   <div class="group">
-                    <label for="user" class="label">Username</label>
-                    <input id="user" type="text" name="username" class="input" data-test="username" value={this.state.username} onChange={this.handleUserChange} required />
+                    <label for="user" class="label">User Name<span className="impFld">*</span></label>
+                    <input id="user" type="text" name="username" class="input" data-test="username" value={this.state.username} onChange={this.handleUserChange} required ></input>
                   </div>
                   <div class="group">
-                    <label for="pass" class="label">Password</label>
+                    <label for="pass" class="label">Password<span className="impFld">*</span></label>
                     <input id="pass" type="password" class="input" data-type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} required />
                   </div>
                   <div class="group">
@@ -122,23 +122,54 @@ class LogIn extends Component {
               </form>
               <form>
                 <div class="sign-up-htm">
-                  <div class="group">
-                    <label for="user" class="label">Username</label>
+                  <div class="Sgroup">
+                    <label for="user" class="label">First Name<span className="impFld">*</span></label>
                     <input id="user" type="text" class="input" required />
                   </div>
-                  <div class="group">
-                    <label for="pass" class="label">Password</label>
-                    <input id="pass" type="password" class="input" data-type="password" required />
+                  <div class="Sgroup">
+                    <label for="user" class="label">Last Name<span className="impFld">*</span></label>
+                    <input id="user" type="text" class="input" required />
                   </div>
-                  <div class="group">
-                    <label for="pass" class="label">Repeat Password</label>
-                    <input id="pass" type="password" class="input" data-type="password" required />
+                  <div class="Sgroup">
+                    <label for="user" class="label">User Name<span className="impFld">*</span></label>
+                    <input id="user" type="text" class="input" required />
                   </div>
-                  <div class="group">
-                    <label for="pass" class="label">Email Address</label>
+                  <div class="Sgroup">
+                    <label for="pass" class="label">Email Address<span className="impFld">*</span></label>
+                    <input id="pass" type="email" class="input" required />
+                  </div>
+                  <div class="Sgroup">
+                    <label for="pass" class="label">Phone Number<span className="impFld">*</span></label>
+                    <input id="pass" type="number" class="input" required />
+                  </div>
+                  <div class="Sgroup">
+                    <label for="pass" class="label">Address<span className="impFld">*</span></label>
                     <input id="pass" type="text" class="input" required />
                   </div>
-                  <div class="group">
+                  <div class="Sgroup">
+                    <label for="pass" class="label">Password<span className="impFld">*</span></label>
+                    <input id="pass" type="password" class="input" data-type="password" required />
+                  </div>
+                  <div class="Sgroup">
+                    <label for="pass" class="label">Repeat Password<span className="impFld">*</span></label>
+                    <input id="pass" type="password" class="input" data-type="password" required />
+                  </div>
+                  <div class="">
+                    <label for="exampleDataList" class="form-label">Qualifications<span className="impFld">*</span></label>
+                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."></input>
+                    <datalist id="datalistOptions">
+                      <option value="Medical Doctor"></option>
+                      <option value="Nurse"></option>
+                      <option value="Paramedic"></option>
+                      <option value="EMTB"></option>
+                      <option value="EMR"></option>
+                      <option value="Fire Fighter"></option>
+                      <option value="CERT Trained"></option>
+                      <option value="Law Inforcement"></option>
+                      <option value="Others"></option>
+                    </datalist>
+                  </div>
+                  <div class="Bgroup">
                     <input type="submit" class="button" value="Sign Up" />
                   </div>
                   <div class="hr"></div>
