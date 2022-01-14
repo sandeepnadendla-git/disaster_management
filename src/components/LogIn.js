@@ -75,15 +75,15 @@ class LogIn extends Component {
 
   save(e) {
     var user = {
-      "UserName": document.getElementById('unamesave'),
-      "Password": document.getElementById('savepass'),
-      "FirstName": document.getElementById('fnamesave'),
-      "LastName": document.getElementById('lnamesave'),
+      "UserName": document.getElementById('unamesave').value,
+      "Password": document.getElementById('savepass').value,
+      "FirstName": document.getElementById('fnamesave').value,
+      "LastName": document.getElementById('lnamesave').value,
       // repeatpassword: document.getElementById('saverpass'),
-      "Email": document.getElementById('saveemail'),
-      "Qualification": document.getElementById('qualification'),
+      "Email": document.getElementById('saveemail').value,
+      "Qualification": document.getElementById('qualification'),value,
       //"Address": document.getElementById('saveaddress'),
-      "PhoneNumber": document.getElementById('phonesave'),
+      "PhoneNumber": document.getElementById('phonesave').value,
       "isAgreed": true,
       "isVerified": true
     }
