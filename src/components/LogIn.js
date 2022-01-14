@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+//import { render } from '@testing-library/react';
 import React, { Component } from 'react'
 import "../css/Login.css";
-
+import axios from "axios";
+const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 
 class LogIn extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +16,7 @@ class LogIn extends Component {
     this.handlePassChange = this.handlePassChange.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.save = this.save.bind(this);
     this.dismissError = this.dismissError.bind(this);
   }
 
@@ -23,43 +24,35 @@ class LogIn extends Component {
     this.setState({ error: '' });
   }
 
-
-
   handleSubmit(evt) {
     evt.preventDefault();
-    if (this.state.username === "Group2@nwmissouri.edu" && this.state.password === "Pass") {
-      console.log("jhugytfrdtyfy")
 
+    if (this.state.username === "Group2@nwmissouri.edu" && this.state.password === "Pass") {
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "balaji@nwmissouri.edu" && this.state.password === "12345") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "goutham@nwmissouri.edu" && this.state.password === "1234pass") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "pariveshita@nwmissouri.edu" && this.state.password === "group2") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "San@nwmissouri.edu" && this.state.password === "secret") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "manisha@nwmissouri.edu" && this.state.password === "password") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else if (this.state.username === "nandini@nwmissouri.edu" && this.state.password === "nandini") {
-      console.log("jhugytfrdtyfy")
-
+      console.log("jhugytfrdtyfy");
       this.props.history.push('/dashboard');
     }
     else {
@@ -80,6 +73,24 @@ class LogIn extends Component {
     });
   }
 
+  save(e) {
+    var user = {
+      "UserName": document.getElementById('unamesave'),
+      "Password": document.getElementById('savepass'),
+      "FirstName": document.getElementById('fnamesave'),
+      "LastName": document.getElementById('lnamesave'),
+      // repeatpassword: document.getElementById('saverpass'),
+      "Email": document.getElementById('saveemail'),
+      "Qualification": document.getElementById('qualification'),
+      //"Address": document.getElementById('saveaddress'),
+      "PhoneNumber": document.getElementById('phonesave'),
+      "isAgreed": true,
+      "isVerified": true
+    }
+
+
+    alert( axios.post(apiBaseUrl + "api/v1/register", user));
+  }
 
   render() {
     return (
@@ -87,8 +98,8 @@ class LogIn extends Component {
       <div className="loginpageouter">
         <div class="login-wrap">
           <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label for="tab-1" class="tab" >Sign In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab">Sign Up</label>
+            <input id="tab-1" type="radio" name="tab" class="sign-in" readOnly checked /><label for="tab-1" class="tab" >Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" readOnly /><label for="tab-2" class="tab">Sign Up</label>
             <div class="login-form">
               <form onSubmit={this.handleSubmit}>
                 {
@@ -120,43 +131,43 @@ class LogIn extends Component {
                   </div>
                 </div>
               </form>
-              <form>
+              <form onSubmit={this.save}>
                 <div class="sign-up-htm">
                   <div class="Sgroup">
-                    <label for="user" class="label">First Name<span className="impFld">*</span></label>
-                    <input id="user" type="text" class="input" required />
+                    <label for="fnamesave" class="label">First Name<span className="impFld">*</span></label>
+                    <input id="fnamesave" type="text" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="user" class="label">Last Name<span className="impFld">*</span></label>
-                    <input id="user" type="text" class="input" required />
+                    <label for="lnamesave" class="label">Last Name<span className="impFld">*</span></label>
+                    <input id="lnamesave" type="text" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="user" class="label">User Name<span className="impFld">*</span></label>
-                    <input id="user" type="text" class="input" required />
+                    <label for="unamesave" class="label">User Name<span className="impFld">*</span></label>
+                    <input id="unamesave" type="text" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="pass" class="label">Email Address<span className="impFld">*</span></label>
-                    <input id="pass" type="email" class="input" required />
+                    <label for="savemail" class="label">Email Address<span className="impFld">*</span></label>
+                    <input id="savemail" type="email" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="pass" class="label">Phone Number<span className="impFld">*</span></label>
-                    <input id="pass" type="number" class="input" required />
+                    <label for="phonesave" class="label">Phone Number<span className="impFld">*</span></label>
+                    <input id="phonesave" type="number" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="pass" class="label">Address<span className="impFld">*</span></label>
-                    <input id="pass" type="text" class="input" required />
+                    <label for="saveaddress" class="label">Address<span className="impFld">*</span></label>
+                    <input id="saveaddress" type="text" class="input" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="pass" class="label">Password<span className="impFld">*</span></label>
-                    <input id="pass" type="password" class="input" data-type="password" required />
+                    <label for="savepass" class="label">Password<span className="impFld">*</span></label>
+                    <input id="savepass" type="password" class="input" data-type="password" required />
                   </div>
                   <div class="Sgroup">
-                    <label for="pass" class="label">Repeat Password<span className="impFld">*</span></label>
-                    <input id="pass" type="password" class="input" data-type="password" required />
+                    <label for="saverpass" class="label">Repeat Password<span className="impFld">*</span></label>
+                    <input id="saverpass" type="password" class="input" data-type="password" required />
                   </div>
                   <div class="">
-                    <label for="exampleDataList" class="form-label">Qualifications<span className="impFld">*</span></label>
-                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."></input>
+                    <label for="savequali" class="form-label">Qualifications<span className="impFld">*</span></label>
+                    <input class="form-control" list="datalistOptions" id="savequali" placeholder="Type to search..."></input>
                     <datalist id="datalistOptions">
                       <option value="Medical Doctor"></option>
                       <option value="Nurse"></option>

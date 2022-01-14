@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Container from 'react-bootstrap/Container';
-import { Form, Col, FormGroup, Checkbox, Button } from 'react-bootstrap'
+//import { Form, Col, FormGroup, Checkbox, Button } from 'react-bootstrap'
 import "../css/IncidentReport.css"
 
 
