@@ -81,7 +81,7 @@ class LogIn extends Component {
       "LastName": document.getElementById('lnamesave').value,
       // repeatpassword: document.getElementById('saverpass'),
       "Email": document.getElementById('saveemail').value,
-      "Qualification": document.getElementById('qualification'),value,
+      "Qualification": document.getElementById('qualification').value,
       //"Address": document.getElementById('saveaddress'),
       "PhoneNumber": document.getElementById('phonesave').value,
       "isAgreed": true,
