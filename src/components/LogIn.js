@@ -88,8 +88,8 @@ class LogIn extends Component {
       "isVerified": true
     }
 
-
-    alert( axios.post(apiBaseUrl + "api/v1/register", user));
+console.log(user);
+  axios.post(apiBaseUrl + "api/v1/register", user);
   }
 
   render() {
