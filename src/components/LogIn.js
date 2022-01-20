@@ -2,7 +2,8 @@
 import React, { Component } from 'react'
 import "../css/Login.css";
 import axios from "axios";
-const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+ const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+//const apiBaseUrl = "http://localhost:5000/";
 
 class LogIn extends Component {
   constructor(props) {
@@ -74,21 +75,18 @@ class LogIn extends Component {
   }
 
   save(e) {
+    e.preventDefault();
     var user = {
-      "UserName": document.getElementById('unamesave').value,
-      "Password": document.getElementById('savepass').value,
-      "FirstName": document.getElementById('fnamesave').value,
-      "LastName": document.getElementById('lnamesave').value,
-      // repeatpassword: document.getElementById('saverpass'),
-      "Email": document.getElementById('saveemail').value,
-      "Qualification": document.getElementById('qualification').value,
-      //"Address": document.getElementById('saveaddress'),
-      "PhoneNumber": document.getElementById('phonesave').value,
-      "isAgreed": true,
-      "isVerified": true
+      "userName": document.getElementById('unamesave').value,
+      "password": document.getElementById('savepass').value,
+      "firstName": document.getElementById('fnamesave').value,
+      "lastName": document.getElementById('lnamesave').value,
+      "email": document.getElementById('savemail').value,
+      "qualification": document.getElementById('savequali').value,
+      "phoneNumber": document.getElementById('phonesave').value,
+      "agreed": true,
+      "verified": true
     }
-
-console.log(user);
   axios.post(apiBaseUrl + "api/v1/register", user);
   }
 
