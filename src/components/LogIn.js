@@ -76,6 +76,7 @@ class LogIn extends Component {
 
   save(e) {
     e.preventDefault();
+    
     var user = {
       "userName": document.getElementById('unamesave').value,
       "password": document.getElementById('savepass').value,
@@ -87,8 +88,10 @@ class LogIn extends Component {
       "agreed": true,
       "verified": true
     }
-  axios.post(apiBaseUrl + "api/v1/register", user);
+    axios.post(apiBaseUrl + "api/v1/register", user);
   }
+
+  
 
   render() {
     return (
