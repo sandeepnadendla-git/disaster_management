@@ -6,6 +6,30 @@ import Container from 'react-bootstrap/Container';
 import "../css/IncidentReport.css"
 
 
+function saveIncident(e) {
+    alert("Incident Reported Sucessfully");
+    var incidentInfo = {
+        "address": document.getElementById('address').value,
+        "city": document.getElementById('city').value,
+        "state": document.getElementById('state').value,
+        "zip": document.getElementById('zip').value,
+        "logitude": document.getElementById('logitude').value,
+        "latitude": document.getElementById('latitude').value,
+        "notes": document.getElementById('notes').value,
+        "customFile": document.getElementById('customeFile').value,
+
+        "cas": document.querySelector('input[name="cas"]:checked').value,
+        "sdm": document.querySelector('input[name="sdm"]:checked').value,
+        "fire": document.querySelector('input[name="fire"]:checked').value,
+        "hz": document.querySelector('input[name="hz"]:checked').value,
+        "other": document.getElementById('other').value
+    }
+    console.log(incidentInfo.address, incidentInfo.cas)
+
+    window.location.reload();
+}
+
+
 function IncidentReport() {
     return (
         /*<div className="outCSS"> 
@@ -17,134 +41,157 @@ function IncidentReport() {
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>*/
         <div className="outCSS">
-        <Container>
-        <form>
-        <div class="form-group row">
+            <h2 className='headingPage'> Report Incident</h2>
+            <Container>
+                <form onSubmit={saveIncident} autoComplete='off'>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">Address: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="address" required />
+                            </div>
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">City: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="city" required />
+                            </div>
+                        </div>
+                    </fieldset>
 
-            <div class="col-sm-5">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" aria-describedby="emailHelp"/>
-            </div>
-            <div class="col-sm-5">
-                <label for="city">City</label>
-                <input type="text" class="form-control" id="city" aria-describedby="emailHelp"/>
-            </div>
-            <div class="col-sm-5">
-                <label for="state">State</label>
-                <input type="text" class="form-control" id="state" aria-describedby="emailHelp"/>
-            </div>
-            <div class="col-sm-5">
-                <label for="exampleInputPassword1">Zip</label>
-                <input type="text" class="form-control" id="zip" aria-describedby="emailHelp"/>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">State: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="state" required />
+                            </div>
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">Zip: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="zip" required />
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <label>Coordinates</label>
-        <div class="form-group row mb-3">
-            <div class="col-sm-5">
-                <label for="longitude">Longitude</label>
-                <input type="text" class="form-control" id="longitude" aria-describedby="emailHelp"/>
-            </div>
-            <div class="col-sm-5">
-                <label for="latitude">Latitude</label>
-                <input type="text" class="form-control" id="latitude" aria-describedby="emailHelp"/>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">Longitude: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="longitude" required />
+                            </div>
+                            <div class="col-sm-5">
+                                <legend class="col-form-label col-sm-4 pt-0">Latitude: </legend>
+                                <input class="form-control col-form col-sm-6" type="text" id="latitude" required />
+                            </div>
+                        </div>
+                    </fieldset>
 
-        
-        <div class="form-group row mb-3">
-            <div class="col-sm-10">
-                <label for="notes">Notes</label>
-                <input type="text" class="form-control" id="notes" aria-describedby="emailHelp"/>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Notes:</legend>
+                            <div class="form-check col-sm-7">
+                                <input type="text" class="form-control" id="notes" required />
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <div class="form-group row mb-3">
-            <div class="custom-file">
-                
-                <label class="custom-file-label" for="customFile">Choose file</label>
-                <input type="file" class="custom-file-input" id="customFile"/>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Choose file:</legend>
+                            <div class="form-check col-sm-7">
+                                <input type="file" class="custom-file-input" id="customFile" multiple />
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <div class="form-group row mb-3">
-            <div class="container col-sm-2">
-                <label>Casuality: </label>
-            </div>
-            <div class="container col-sm-2 ">
-                <button type="button" class="btn btn-success">GREEN</button>
-            </div>
-            <div class="container col-sm-2">
-                <button type="button" class="btn btn-warning">YELLOW</button>
-            </div>
-            <div class="container col-sm-2">
-                <button type="button" class="btn btn-danger">RED</button>
-            </div>
-            <div class="container col-sm-2">
-                <button type="button" class="btn btn-dark">BLACK</button>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <label class="col-form-label col-sm-3 pt-0">Casuality: </label>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="cas" id="casuality1" value="green" />
+                                <label class="form-check-label" for="casuality1">Green</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="cas" id="casuality1" value="yellow" />
+                                <label class="form-check-label" for="casuality1">Yellow</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="cas" id="casuality1" value="red" />
+                                <label class="form-check-label" for="casuality1">Red</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="cas" id="casuality1" value="black" />
+                                <label class="form-check-label" for="casuality1">Black</label>
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <div class="form-group  mb-3">
-            <lable>Structural Damage: </lable>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="Structural_dm" id="sd_high" value="option1"/>
-                <label class="form-check-label" for="sd_high">HIGH</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="Structural_dm" id="sd_medium" value="option2"/>
-                <label class="form-check-label" for="sd_medium">MEDIUM</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="Structural_dm" id="sd_low" value="option3" />
-                <label class="form-check-label" for="sd_low">LOW</label>
-            </div>
-        </div>
 
-        <div class="form-group mb-3">
-            <lable>Fire: </lable>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="fire_radio" id="f_high" value="option1"/>
-                <label class="form-check-label" for="f_high">Major</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="fire_radio" id="f_medium" value="option2"/>
-                <label class="form-check-label" for="f_medium">Moderate</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="fire_radio" id="f_medium" value="option3"/>
-                <label class="form-check-label" for="f_medium">Minor</label>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Structural Damage: </legend>
+                            <div class="form-check col-sm-2 ">
+                                <input class="form-check-input" type="radio" name="sdm" id="struct_damage1" value="high" />
+                                <label class="form-check-label" for="struct_damage1">HIGH</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="sdm" id="struct_damage2" value="medium" />
+                                <label class="form-check-label" for="struct_damage2">MEDIUM</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="sdm" id="struct_damage3" value="low" />
+                                <label class="form-check-label" for="struct_damage3">LOW</label>
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <div class="form-group mb-3">
-            <lable>HAZMAT: </lable>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="hz_high" id="hz_high" value="option1"/>
-                <label class="form-check-label" for="hz_high">Gas</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="hz_medium" id="hz_medium" value="option2"/>
-                <label class="form-check-label" for="hz_medium">Fluid</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="hz_medium" id="hz_medium" value="option3"/>
-                <label class="form-check-label" for="hz_medium">Solid</label>
-            </div>
-        </div>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Fire: </legend>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="fire" id="fire1" value="major" />
+                                <label class="form-check-label" for="fire1">Major</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="fire" id="fire2" value="moderate" />
+                                <label class="form-check-label" for="fire2">Moderate</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="fire" id="fire3" value="minor" />
+                                <label class="form-check-label" for="fire3">Minor</label>
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <div class="form-group row mb-3">
-            <div class="col-sm-3">
-                <label for="other">Other(Disaster):</label>
-            </div>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="other" aria-describedby="emailHelp"/>
-            </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        </Container>
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">HAZMAT: </legend>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="hz" id="hazmat1" value="gas" />
+                                <label class="form-check-label" for="hazmat1">Gas</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="hz" id="hazmat2" value="fluid" />
+                                <label class="form-check-label" for="hazmat2">Fluid</label>
+                            </div>
+                            <div class="form-check col-sm-2">
+                                <input class="form-check-input" type="radio" name="hz" id="hazmat3" value="solid" />
+                                <label class="form-check-label" for="hazmat3">Solid</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group mb-3">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Other(Disaster):</legend>
+                            <div class="form-check col-sm-7">
+                                <input type="text" class="form-control" id="other" />
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </Container>
         </div>
     )
 }

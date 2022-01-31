@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import "../css/Login.css";
 import axios from "axios";
- const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 //const apiBaseUrl = "http://localhost:5000/";
 
 class LogIn extends Component {
@@ -27,6 +27,20 @@ class LogIn extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    var user = {
+      "userName":this.state.username,
+      "password": this.state.password,
+     
+    }
+    // const r=axios.post(apiBaseUrl + "api/v1/Log", user)
+    // .then(function (response) {
+    //   if(response.status==208){
+    //     alert("Password and Email is wrong");
+    //   }else{
+    //     alert("Succesfully registered please login");
+    //     window.location.reload();
+    //   }
+    // });
 
     if (this.state.username === "Group2@nwmissouri.edu" && this.state.password === "Pass") {
       console.log("jhugytfrdtyfy");
@@ -88,7 +102,23 @@ class LogIn extends Component {
       "agreed": true,
       "verified": true
     }
-    axios.post(apiBaseUrl + "api/v1/register", user);
+    
+    const r=axios.post(apiBaseUrl + "api/v1/register", user)
+    .then(function (response) {
+      if(response.status==208){
+        alert("Email already exists please try with different email");
+      }else{
+        alert("Succesfully registered please login");
+        window.location.reload();
+      }
+      // console.log(response.data);
+      //status = response.status;
+      // console.log(response.statusText);
+      // console.log(response.headers);
+      // console.log(response.config);
+    });
+    
+
   }
 
   
