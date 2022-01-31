@@ -47,11 +47,11 @@ function IncidentReport() {
                     <fieldset class="form-group mb-3">
                         <div class="row">
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">Address: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">Address:<span className="impFld">*</span> </legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="address" required />
                             </div>
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">City: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">City:<span className="impFld">*</span> </legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="city" required />
                             </div>
                         </div>
@@ -60,11 +60,11 @@ function IncidentReport() {
                     <fieldset class="form-group mb-3">
                         <div class="row">
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">State: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">State: <span className="impFld">*</span></legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="state" required />
                             </div>
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">Zip: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">Zip:<span className="impFld">*</span> </legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="zip" required />
                             </div>
                         </div>
@@ -73,11 +73,11 @@ function IncidentReport() {
                     <fieldset class="form-group mb-3">
                         <div class="row">
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">Longitude: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">Longitude:<span className="impFld">*</span> </legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="longitude" required />
                             </div>
                             <div class="col-sm-5">
-                                <legend class="col-form-label col-sm-4 pt-0">Latitude: </legend>
+                                <legend class="col-form-label col-sm-4 pt-0">Latitude:<span className="impFld">*</span> </legend>
                                 <input class="form-control col-form col-sm-6" type="text" id="latitude" required />
                             </div>
                         </div>
@@ -85,7 +85,7 @@ function IncidentReport() {
 
                     <fieldset class="form-group mb-3">
                         <div class="row">
-                            <legend class="col-form-label col-sm-3 pt-0">Notes:</legend>
+                            <legend class="col-form-label col-sm-3 pt-0">Notes:<span className="impFld">*</span></legend>
                             <div class="form-check col-sm-7">
                                 <input type="text" class="form-control" id="notes" required />
                             </div>

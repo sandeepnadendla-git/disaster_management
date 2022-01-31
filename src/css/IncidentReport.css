@@ -9,3 +9,8 @@
     text-align: center;
     border: 1px dashed;
 }
+.impFld{
+	color: red;
+    font-size: 18px;
+    padding: 4px;
+}
