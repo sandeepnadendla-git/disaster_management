@@ -1,58 +1,81 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../css/report.css'
+import Layout from './Layout'
+import JsonData from './d.json'
+import axios from "axios"
+//const apiBaseUrl = "http://localhost:5051/";
+const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 
 
 function Report() {
- 
-   
-    return (
-        <div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="/Report">Reports</a></li>
-            <li><a href="#contact">Report Incident</a></li>
-            <li style={{float:'right'}}><a class="active" href="/login">Log Out</a></li>
-        </ul>
-    
-        <table>
-        <tr>
-          <th>Company</th>
-          <th>Contact</th>
-          <th>Country</th>
-        </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>Roland Mendel</td>
-          <td>Austria</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>Helen Bennett</td>
-          <td>UK</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>Yoshi Tannamuri</td>
-          <td>Canada</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>Giovanni Rovelli</td>
-          <td>Italy</td>
-        </tr>
-      </table> 
-      </div>
-    )
+  var DisplayData;
+  const [count, setCount] = useState(0);  
+  useEffect(async () => {
+    await axios.get(apiBaseUrl + "api/v2/IncidentReports")
+      .then(function (response) {
+        if (response.status == 208) {
+          DisplayData = '<h1>N/A</h1>';
+          alert("Email already exists please try with different email");
+        } else {
+
+          DisplayData = response.data.map(
+            (info) => {
+              return (
+                <tr>
+                  <td>{info.reportID}</td>
+                  <td>{info.address}</td>
+                  <td>{info.city}</td>
+                  <td>{info.state}</td>
+                  <td>{info.zip}</td>
+                  <td>{info.longitude}</td>
+                  <td>{info.latitude}</td>
+                  <td>{info.images}</td>
+                  <td>{info.casuality}</td>
+                  <td>{info.sDamage}</td>
+                  <td>{info.fire}</td>
+                  <td>{info.hazmat}</td>
+                  <td>{info.other}</td>
+                </tr>
+              )
+            }
+          )
+          setCount(DisplayData)
+        }
+      }
+      )
+  })
+
+  return (
+    <div>
+      <Layout></Layout>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Sr.NO</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Images</th>
+            <th>Casuality</th>
+            <th>Structural Damage</th>
+            <th>Fire</th>
+            <th>Hazmat</th>
+            <th>Other</th>
+          </tr>
+        </thead>
+        <tbody id='Jdata'>
+         {count}
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+  )
 }
 
 export default Report

@@ -14,3 +14,6 @@
     font-size: 18px;
     padding: 4px;
 }
+button#modalBtnhide.btn.btn-primary {
+    display: none;
+}

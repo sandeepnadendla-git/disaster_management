@@ -5,6 +5,8 @@ import "./css/index.css"
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/scss/bootstrap.scss"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
+
 //import Layout from "./components/Layout.js"
 
 ReactDOM.render(
