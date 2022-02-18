@@ -218,6 +218,7 @@ class LogIn extends Component {
             </div>
           </div>
         </div>
+        <div class="image" title="Welcome to CERT"></div>
       </div>
     )
   }
