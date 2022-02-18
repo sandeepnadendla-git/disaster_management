@@ -26,6 +26,7 @@ function Report() {
         <table class="table">
           <thead>
             <th>title</th>
+            <th>incidentId</th>
             <th>typeOfIncident</th>
             <th>description</th>
             <th>red</th>
@@ -37,13 +38,12 @@ function Report() {
             <th>imageURL</th>
             <th>impactLevel</th>
             <th>Address</th>
-            <th>zipCode</th>
-            <th>incidentId</th>
-            <th>latitude</th>
             <th>location</th>
+            <th>state</th>
+            <th>zipCode</th>
+            <th>latitude</th>
             <th>longitude</th>
             <th>notes</th>
-            <th>state</th>
             <th>timedate</th>
             <th>updatedAt</th>
             <th>userName</th>
@@ -55,6 +55,7 @@ function Report() {
               <tr>
 
                 <td>{report.data.title}</td>
+                <td>{report.data.incidentId}</td>
                 <td>{report.data.typeOfIncident}</td>
                 <td>{report.data.description}</td>
                 <td>{report.data.red}</td>
@@ -70,14 +71,13 @@ function Report() {
                   </div>
                 </a></td>
                 <td>{report.data.impactLevel}</td>
-                <td>{report.data.incidentId}</td>
                 <td>{report.data.address}</td>
+                <td>{report.data.location}</td>
+                <td>{report.data.state}</td>
                 <td>{report.data.zipCode}</td>
                 <td>{report.data.latitude}</td>
-                <td>{report.data.location}</td>
                 <td>{report.data.longitude}</td>
                 <td>{report.data.notes}</td>
-                <td>{report.data.state}</td>
                 <td>{report.data.timedate}</td>
                 <td>{report.data.updatedAt}</td>
                 <td>{report.data.userName}</td>

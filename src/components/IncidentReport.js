@@ -20,7 +20,7 @@ function saveIncident(e) {
     e.preventDefault();
     //  alert("Incident Reported Sucessfully");
     const incidentInfo = {
-        username: "sandeep",
+        userName: "sandeep",
         address: document.getElementById('address').value,
         location: document.getElementById('city').value,
         state: document.getElementById('state').value,
@@ -28,7 +28,7 @@ function saveIncident(e) {
         longitude: document.getElementById('longitude').value,
         latitude: document.getElementById('latitude').value,
         description: document.getElementById('notes').value,
-        imageURL: document.getElementById('output').src,
+        imageURL: " ",
         green: document.getElementById('casualitygreen').value,
         yellow: document.getElementById('casualityyellow').value,
         red: document.getElementById('casualityred').value,

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import "../css/Login.css";
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
 import { analytics } from "../firebase.js";
+import { collection, addDoc, Firestore, setDoc, Timestamp } from "firebase/firestore";
 //const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 //const apiBaseUrl = "http://localhost:5051/";
 
@@ -31,7 +32,7 @@ class LogIn extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    alert()
+    
     var user2 = {
       "email": this.state.username,
       "password": this.state.password
@@ -43,12 +44,13 @@ class LogIn extends Component {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-
+        this.props.history.push('/dashboard');
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(error.message);
       });
   }
 
@@ -85,10 +87,10 @@ class LogIn extends Component {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        alert("Succesfully registered please login");
-        window.location.reload();
-
-        // ...
+     
+          alert("Succesfully registered please login");
+          window.location.reload();
+            // ...
       })
       .catch((error) => {
         const errorCode = error.code;
