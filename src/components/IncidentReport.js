@@ -1,11 +1,12 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
-
-//import { Form, Col, FormGroup, Checkbox, Button } from 'react-bootstrap'
+import { collection, addDoc, Firestore, setDoc, Timestamp } from "firebase/firestore";
 import "../css/IncidentReport.css"
 import axios from "axios"
 import Layout from './Layout';
+import { analytics } from '../firebase';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, getMetadata } from "firebase/storage";
 //const apiBaseUrl = "http://localhost:5051/";
 const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 
@@ -17,32 +18,37 @@ const { useState } = React;
 
 function saveIncident(e) {
     e.preventDefault();
-  //  alert("Incident Reported Sucessfully");
-    var incidentInfo = {
-        "user_id": "1",
-        "address": document.getElementById('address').value,
-        "city": document.getElementById('city').value,
-        "state": document.getElementById('state').value,
-        "zip": document.getElementById('zip').value,
-        "longitude": document.getElementById('longitude').value,
-        "latitude": document.getElementById('latitude').value,
-        "notes": document.getElementById('notes').value,
-        "images": document.getElementById('output').src,
-        "casuality": document.querySelector('input[name="cas"]:checked').value,
-        "sDamage": document.querySelector('input[name="sdm"]:checked').value,
-        "fire": document.querySelector('input[name="fire"]:checked').value,
-        "hazmat": document.querySelector('input[name="hz"]:checked').value,
-        "other": document.getElementById('other').value
+    //  alert("Incident Reported Sucessfully");
+    const incidentInfo = {
+        username: "sandeep",
+        address: document.getElementById('address').value,
+        location: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zipCode: document.getElementById('zip').value,
+        longitude: document.getElementById('longitude').value,
+        latitude: document.getElementById('latitude').value,
+        description: document.getElementById('notes').value,
+        imageURL: document.getElementById('output').src,
+        green: document.getElementById('casualitygreen').value,
+        yellow: document.getElementById('casualityyellow').value,
+        red: document.getElementById('casualityred').value,
+        black: document.getElementById('casualityblack').value,
+        structuralDamageImpact: document.querySelector('input[name="sdm"]:checked').value,
+        fire: document.querySelector('input[name="fire"]:checked').value,
+        hazmatType: document.querySelector('input[name="hz"]:checked').value,
+        notes: document.getElementById('other').value,
+        timedate: Timestamp.now().toDate().toString(),
+        updatedAt: Timestamp.now().toDate().toString()
     }
-	console.log(incidentInfo);
-	    axios.post(apiBaseUrl + "api/v2/saveReport", incidentInfo)
-    .then(function (response) {
-      if(response.status==208){
-        alert("Internal server issue");
-      }else{
-        document.getElementById("modalBtnhide").click();
-      }
-});
+
+
+    try {
+        const docRef = addDoc(collection(analytics, "reportsDB"), incidentInfo);
+        alert("Report added successfully");
+    } catch (e) {
+        alert("Error adding document: ", e);
+    }
+
 }
 
 function close() {
@@ -50,14 +56,39 @@ function close() {
     window.location.reload();
 }
 
-function IncidentReport() {
-    
-    const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-const [state, setState] = useState(null);
-console.log(state);
+function IncidentReport() {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [state, setState] = useState(null);
+    const [image, setImage] = useState('');
+    const upload = () => {
+        const storage = getStorage();
+
+        if (image == null)
+            return;
+        const storageRef = ref(storage, `/imageReports/${image.name}`);
+        const metadata = {
+            contentType: 'image/jpeg',
+        };
+
+        uploadBytesResumable(storageRef, image, metadata)
+            .then((snapshot) => {
+                console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                console.log('File metadata:', snapshot.metadata);
+                // Let's get a download URL for the file.
+                getDownloadURL(snapshot.ref).then((url) => {
+                    console.log('File available at', url);
+                    // ...
+                });
+            }).catch((error) => {
+                console.error('Upload failed', error);
+                // ...
+            });
+    }
+    console.log(state);
     return (
         <div>
             <Layout></Layout>
@@ -128,19 +159,10 @@ console.log(state);
                                 <legend class="col-form-label col-sm-3 pt-0">Choose file:</legend>
                                 <div class="form-check col-sm-7">
                                     <div>
-                                        <input type="file" class="custom-file-input" id="input" accept="image/*"
-                                            onChange={event => setState(
-                                                URL.createObjectURL(event.target.files[0])
-                                            )} value="" multiple />
-
-                                        {state && (
-                                            <button
-                                                onClick={event => setState(null)}
-                                            >Remove Image</button>)}
-                                        <img id="output" style={{ width: "50%" }} src={state} />
-
+                                        <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
+                                        <button onClick={upload}>Upload</button>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </fieldset>
@@ -149,20 +171,20 @@ console.log(state);
                             <div class="row">
                                 <label class="col-form-label col-sm-3 pt-0">Casuality: </label>
                                 <div class="form-check col-sm-2">
-                                    <input class="form-check-input" type="radio" name="cas" id="casuality1" value="green" />
                                     <label class="form-check-label" for="casuality1">Green</label>
+                                    <input class="form-control" type="number" id="casualitygreen" />
                                 </div>
                                 <div class="form-check col-sm-2">
-                                    <input class="form-check-input" type="radio" name="cas" id="casuality1" value="yellow" />
                                     <label class="form-check-label" for="casuality1">Yellow</label>
+                                    <input class="form-control" type="number" id="casualityyellow" />
                                 </div>
                                 <div class="form-check col-sm-2">
-                                    <input class="form-check-input" type="radio" name="cas" id="casuality1" value="red" />
                                     <label class="form-check-label" for="casuality1">Red</label>
+                                    <input class="form-control" type="number" id="casualityred" />
                                 </div>
                                 <div class="form-check col-sm-2">
-                                    <input class="form-check-input" type="radio" name="cas" id="casuality1" value="black" />
                                     <label class="form-check-label" for="casuality1">Black</label>
+                                    <input class="form-control" type="number" id="casualityblack" />
                                 </div>
                             </div>
                         </fieldset>
@@ -238,19 +260,19 @@ console.log(state);
                 </Container>
             </div>
             <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Report Incident</Modal.Title>
-        </Modal.Header>
-        <Modal.Body >Incident reported Succesfully </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" id="ClosePop" onClick={close}>
-            OK
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Button variant="primary" onClick={handleShow} id="modalBtnhide">
-        Launch demo modal
-      </Button>
+                <Modal.Header closeButton>
+                    <Modal.Title>Report Incident</Modal.Title>
+                </Modal.Header>
+                <Modal.Body >Incident reported Succesfully </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" id="ClosePop" onClick={close}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Button variant="primary" onClick={handleShow} id="modalBtnhide">
+                Launch demo modal
+            </Button>
         </div>
     )
 }

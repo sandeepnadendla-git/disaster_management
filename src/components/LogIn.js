@@ -1,11 +1,13 @@
 //import { render } from '@testing-library/react';
 import React, { Component } from 'react'
 import "../css/Login.css";
-import axios from "axios";
-const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
+import { analytics } from "../firebase.js";
+//const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 //const apiBaseUrl = "http://localhost:5051/";
 
 class LogIn extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +15,8 @@ class LogIn extends Component {
       password: '',
       error: '',
     };
+
+
 
     this.handlePassChange = this.handlePassChange.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
@@ -27,54 +31,25 @@ class LogIn extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    alert()
     var user2 = {
-      "userName": this.state.username,
+      "email": this.state.username,
       "password": this.state.password
 
     }
+   
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, user2.email, user2.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
 
-    axios.post(apiBaseUrl + "api/v1/login", user2)
-      .then(function (response) {
-        if (response.status == 208) {
-          alert("Password and Email is wrong");
-        } else {
-          alert("Login sucessfully");
-          window.location.href = "/dashboard";
-        }
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
-
-    // if (this.state.username === "Group2@nwmissouri.edu" && this.state.password === "Pass") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "balaji@nwmissouri.edu" && this.state.password === "12345") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "goutham@nwmissouri.edu" && this.state.password === "1234pass") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "pariveshita@nwmissouri.edu" && this.state.password === "group2") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "San@nwmissouri.edu" && this.state.password === "secret") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "manisha@nwmissouri.edu" && this.state.password === "password") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else if (this.state.username === "nandini@nwmissouri.edu" && this.state.password === "nandini") {
-    //   console.log("jhugytfrdtyfy");
-    //   this.props.history.push('/dashboard');
-    // }
-    // else {
-    //   alert("Incorrect Username and password");
-    // }
-    return this.setState({ error: '' });
   }
 
   handleUserChange(evt) {
@@ -91,7 +66,7 @@ class LogIn extends Component {
 
   save(e) {
     e.preventDefault();
-    if (document.getElementById('savepass').value!=document.getElementById('saverpass').value) {
+    if (document.getElementById('savepass').value != document.getElementById('saverpass').value) {
       alert("Password and repeat password doesn't match");
     } else {
       var user = {
@@ -105,21 +80,38 @@ class LogIn extends Component {
         "agreed": true,
         "verified": true
       }
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        alert("Succesfully registered please login");
+        window.location.reload();
 
-      axios.post(apiBaseUrl + "api/v1/register", user)
-        .then(function (response) {
-          if (response.status == 208) {
-            alert("Email already exists please try with different email");
-          } else {
-            alert("Succesfully registered please login");
-            window.location.reload();
-          }
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(error.message)
+        // ..
+      });
+    
+
+      // axios.post(apiBaseUrl + "api/v1/register", user)
+      //   .then(function (response) {
+      //     if (response.status == 208) {
+      //       alert("Email already exists please try with different email");
+      //     } else {
+      //       alert("Succesfully registered please login");
+      //       window.location.reload();
+      //     }
           // console.log(response.data);
           //status = response.status;
           // console.log(response.statusText);
           // console.log(response.headers);
           // console.log(response.config);
-        });
+        // });
     }
 
   }

@@ -1,79 +1,98 @@
 import React, { useState, useEffect } from 'react'
 import '../css/report.css'
 import Layout from './Layout'
-import JsonData from './d.json'
-import axios from "axios"
-//const apiBaseUrl = "http://localhost:5051/";
-const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
+import { analytics } from '../firebase'
+
 
 
 function Report() {
-  var DisplayData;
-  const [count, setCount] = useState(0);  
-  useEffect(async () => {
-    await axios.get(apiBaseUrl + "api/v2/IncidentReports")
-      .then(function (response) {
-        if (response.status == 208) {
-          DisplayData = '<h1>N/A</h1>';
-          alert("Email already exists please try with different email");
-        } else {
-
-          DisplayData = response.data.map(
-            (info) => {
-              return (
-                <tr>
-                  <td>{info.reportID}</td>
-                  <td>{info.address}</td>
-                  <td>{info.city}</td>
-                  <td>{info.state}</td>
-                  <td>{info.zip}</td>
-                  <td>{info.longitude}</td>
-                  <td>{info.latitude}</td>
-                  <td>{info.images}</td>
-                  <td>{info.casuality}</td>
-                  <td>{info.sDamage}</td>
-                  <td>{info.fire}</td>
-                  <td>{info.hazmat}</td>
-                  <td>{info.other}</td>
-                </tr>
-              )
-            }
-          )
-          setCount(DisplayData)
-        }
-      }
-      )
-  })
+  const [openAddModal, setOpenAddModal] = useState(false)
+  const [reportsDB, setReports] = useState([])
+  useEffect(() => {
+    const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'))
+    onSnapshot(q, (querySnapshot) => {
+      setReports(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  }, [])
 
   return (
     <div>
       <Layout></Layout>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Sr.NO</th>
+      <div className='outerDivTable'>
+        <table class="table">
+          <thead>
+            <th>title</th>
+            <th>typeOfIncident</th>
+            <th>description</th>
+            <th>red</th>
+            <th>yellow</th>
+            <th>black</th>
+            <th>green</th>
+            <th>hazmatType</th>
+            <th>structuralDamageImpact</th>
+            <th>imageURL</th>
+            <th>impactLevel</th>
             <th>Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
-            <th>Images</th>
-            <th>Casuality</th>
-            <th>Structural Damage</th>
-            <th>Fire</th>
-            <th>Hazmat</th>
-            <th>Other</th>
-          </tr>
-        </thead>
-        <tbody id='Jdata'>
-         {count}
+            <th>zipCode</th>
+            <th>incidentId</th>
+            <th>latitude</th>
+            <th>location</th>
+            <th>longitude</th>
+            <th>notes</th>
+            <th>state</th>
+            <th>timedate</th>
+            <th>updatedAt</th>
+            <th>userName</th>
+          </thead>
+          <tbody id='Jdata'>
+            {reportsDB.map((report) => (
 
 
-        </tbody>
-      </table>
+              <tr>
 
+                <td>{report.data.title}</td>
+                <td>{report.data.typeOfIncident}</td>
+                <td>{report.data.description}</td>
+                <td>{report.data.red}</td>
+                <td>{report.data.yellow}</td>
+                <td>{report.data.black}</td>
+                <td>{report.data.green}</td>
+                <td>{report.data.hazmatType}</td>
+                <td>{report.data.structuralDamageImpact}</td>
+                <td><a href={report.data.imageURL}>
+                  <img src={report.data.imageURL} alt={report.data.imageURL} className="imgClss"></img>
+                  <div className ="dropdown-content">
+                    <img src={report.data.imageURL} alt={report.data.imageURL} width="300" height="200"></img>
+                  </div>
+                </a></td>
+                <td>{report.data.impactLevel}</td>
+                <td>{report.data.incidentId}</td>
+                <td>{report.data.address}</td>
+                <td>{report.data.zipCode}</td>
+                <td>{report.data.latitude}</td>
+                <td>{report.data.location}</td>
+                <td>{report.data.longitude}</td>
+                <td>{report.data.notes}</td>
+                <td>{report.data.state}</td>
+                <td>{report.data.timedate}</td>
+                <td>{report.data.updatedAt}</td>
+                <td>{report.data.userName}</td>
+              </tr>
+
+            ))}
+
+
+          </tbody>
+        </table>
+      </div>
     </div>
+
+
+
 
   )
 }
