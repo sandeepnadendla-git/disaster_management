@@ -3,9 +3,33 @@ body{
 	color:#6a6f8c;
 	width:100%;
 	height:100%;
-	/* background-image: url(../Images/backLogo.png); */
-	background-size: 100% 100%;
 	font:600 16px/18px 'Open Sans',sans-serif;
+}
+
+.loginpageouter {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 10px;
+	padding: 25px;
+}
+
+.image {
+	content:url(../Images/cert.png);
+	max-height: 600px;
+	/* padding: 20px; */
+	position: absolute;
+  	top: 20%;
+  	left: 50%;
+  	margin: -25px 0 0 -25px;
+	filter: drop-shadow(0 0 0.25rem rgb(0, 2, 0));
+}
+
+.image:hover{
+	filter: drop-shadow(0 0 1.75rem rgb(23, 34, 25));
+}
+
+.login-wrap:hover{
+	filter: drop-shadow(0 0 .75rem rgb(89, 95, 89));
 }
 
 *,:after,:before{box-sizing:border-box}
@@ -192,3 +216,4 @@ a{color:inherit;text-decoration:none}
     font-size: 18px;
     padding: 4px;
 }
+
