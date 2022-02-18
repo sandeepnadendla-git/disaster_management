@@ -1,0 +1,19 @@
+.outCSS{
+    margin: 10%;
+    width: 80%;
+    background-color:#ededed;
+    padding: 5%;
+    border-radius: 3%;
+}
+.headingPage{
+    text-align: center;
+    border: 1px dashed;
+}
+.impFld{
+	color: red;
+    font-size: 18px;
+    padding: 4px;
+}
+button#modalBtnhide.btn.btn-primary {
+    display: none;
+}
