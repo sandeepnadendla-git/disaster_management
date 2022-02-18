@@ -4,6 +4,7 @@ import LogIn from './components/LogIn'
 import Dashboard from './components/Dashboard'
 import report from './components/Report.js'
 import IncidentReport from './components/IncidentReport.js'
+import Users from './components/Users.js'
 
 export class App extends Component {
   render() {
@@ -18,6 +19,7 @@ export class App extends Component {
             <Route  path='/register' component={LogIn} />
             <Route  path='/dashboard' component={Dashboard} />
             <Route  path='/report' component={report} />
+            <Route  path='/users' component={Users} />
             <Route  path='/IncidentReport' component={IncidentReport} />
           </Switch>
         </div>
