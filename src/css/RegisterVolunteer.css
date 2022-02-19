@@ -17,3 +17,6 @@
 button#modalBtnhide.btn.btn-primary {
     display: none;
 }
+.ContainerOuter{
+    margin-left : 10% !important;
+}

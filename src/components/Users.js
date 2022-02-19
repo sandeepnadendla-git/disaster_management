@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import '../css/report.css'
+//import '../css/report.css'
 import Layout from './Layout'
 import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
 import { analytics } from '../firebase'
-
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
+import { filterBy } from "@progress/kendo-data-query";
+import '@progress/kendo-theme-default/dist/all.css';
 
 
 function Users() {
+  const initialFilter = {
+    logic: "and",
+    filters: [
+      {
+        field: "firstName",
+        operator: "contains",
+        value: "",
+      },
+    ],
+  };
+  const [filter, setFilter] = React.useState(initialFilter);
+
   const [openAddModal, setOpenAddModal] = useState(false)
   const [usersDB, setReports] = useState([])
   useEffect(() => {
     const q = query(collection(analytics, 'usersDB'), orderBy('createdAt'))
     onSnapshot(q, (querySnapshot) => {
-      setReports(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })))
+      setReports(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })))
     })
   }, [])
 
@@ -23,20 +34,26 @@ function Users() {
     <div>
       <Layout></Layout>
       <div className='outerDivTable'>
-        <table class="table">
-          <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email ID</th>
-            <th>Mobile Number</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Qualification</th>
-            <th>Role</th>
-            
-          </thead>
+
+        <Grid
+          style={{
+            height: "525px",
+          }}
+          data={filterBy(usersDB, filter)}
+          filterable={true}
+          filter={filter}
+          onFilterChange={(e) => setFilter(e.filter)}
+        >
+          <GridColumn field="firstName" title="firstName" />
+
+          <GridColumn field="lastName" title="lastName" />
+          <GridColumn field="emailAddress" title="emailAddress" />
+          <GridColumn field="contactNumber" title="contactNumber" />
+          <GridColumn field="streetAddress" title="streetAddress" />
+        </Grid>
+        );
+
+        {/* </thead>
           <tbody id='Jdata'>
             {usersDB.map((users) => (
               <tr>
@@ -56,7 +73,7 @@ function Users() {
 
 
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
 

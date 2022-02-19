@@ -8,7 +8,7 @@ import Layout from './Layout';
 import { analytics } from '../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, getMetadata } from "firebase/storage";
 //const apiBaseUrl = "http://localhost:5051/";
-const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
+//const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 
 
 
@@ -64,7 +64,7 @@ function RegisterVolunteer() {
             <Layout></Layout>
             <div className="outCSS">
                 <h2 className='headingPage'> Register Volunteer</h2>
-                <Container>
+                <Container className='ContainerOuter'>
                     <form onSubmit={saveIncident} autoComplete='off'>
                         <fieldset class="form-group mb-3">
                             <div class="row">

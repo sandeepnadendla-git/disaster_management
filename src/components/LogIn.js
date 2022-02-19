@@ -4,8 +4,6 @@ import "../css/Login.css";
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
 import { analytics } from "../firebase.js";
 import { collection, addDoc, Firestore, setDoc, Timestamp } from "firebase/firestore";
-//const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
-//const apiBaseUrl = "http://localhost:5051/";
 
 class LogIn extends Component {
   
@@ -100,21 +98,7 @@ class LogIn extends Component {
       });
     
 
-      // axios.post(apiBaseUrl + "api/v1/register", user)
-      //   .then(function (response) {
-      //     if (response.status == 208) {
-      //       alert("Email already exists please try with different email");
-      //     } else {
-      //       alert("Succesfully registered please login");
-      //       window.location.reload();
-      //     }
-          // console.log(response.data);
-          //status = response.status;
-          // console.log(response.statusText);
-          // console.log(response.headers);
-          // console.log(response.config);
-        // });
-    }
+         }
 
   }
 

@@ -3,19 +3,30 @@ import '../css/report.css'
 import Layout from './Layout'
 import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
 import { analytics } from '../firebase'
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
+import { filterBy } from "@progress/kendo-data-query";
+import '@progress/kendo-theme-default/dist/all.css';
 
 
 
 function Report() {
+  const initialFilter = {
+    logic: "and",
+    filters: [
+      {
+        field: "firstName",
+        operator: "contains",
+        value: "",
+      },
+    ],
+  };
+  const [filter, setFilter] = React.useState(initialFilter);
   const [openAddModal, setOpenAddModal] = useState(false)
   const [reportsDB, setReports] = useState([])
   useEffect(() => {
     const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'))
     onSnapshot(q, (querySnapshot) => {
-      setReports(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })))
+      setReports(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })))
     })
   }, [])
 
@@ -23,71 +34,50 @@ function Report() {
     <div>
       <Layout></Layout>
       <div className='outerDivTable'>
-        <table class="table">
-          <thead>
-            <th>title</th>
-            <th>incidentId</th>
-            <th>typeOfIncident</th>
-            <th>description</th>
-            <th>red</th>
-            <th>yellow</th>
-            <th>black</th>
-            <th>green</th>
-            <th>hazmatType</th>
-            <th>structuralDamageImpact</th>
-            <th>imageURL</th>
-            <th>impactLevel</th>
-            <th>Address</th>
-            <th>location</th>
-            <th>state</th>
-            <th>zipCode</th>
-            <th>latitude</th>
-            <th>longitude</th>
-            <th>notes</th>
-            <th>timedate</th>
-            <th>updatedAt</th>
-            <th>userName</th>
-          </thead>
-          <tbody id='Jdata'>
-            {reportsDB.map((report) => (
+      <Grid
+          style={{
+            height: "525px",
+            width: "5000px",
+          }}
+          data={filterBy(reportsDB, filter)}
+          filterable={true}
+          filter={filter}
+          onFilterChange={(e) => setFilter(e.filter)}
+        >
+          <GridColumn field="title"  minWidth="1000px" title="title" />
 
-
-              <tr>
-
-                <td>{report.data.title}</td>
-                <td>{report.data.incidentId}</td>
-                <td>{report.data.typeOfIncident}</td>
-                <td>{report.data.description}</td>
-                <td>{report.data.red}</td>
-                <td>{report.data.yellow}</td>
-                <td>{report.data.black}</td>
-                <td>{report.data.green}</td>
-                <td>{report.data.hazmatType}</td>
-                <td>{report.data.structuralDamageImpact}</td>
-                <td><a href={report.data.imageURL}>
+          <GridColumn field="lastName" title="lastName" />
+          <GridColumn field="incidentId" title="incidentId" />
+          <GridColumn field="typeOfIncident" title="typeOfIncident" />
+          <GridColumn field="description" title="streetAddress" />
+          <GridColumn field="red" title="red" />
+          <GridColumn field="yellow" title="yellow" />
+          <GridColumn field="black" title="black" />
+          <GridColumn field="green" title="green" />
+          <GridColumn field="hazmatType" title="hazmatType" />
+          <GridColumn field="structuralDamageImpact" title="structuralDamageImpact" />
+          {/* <GridColumn field="none" title="none" /> */}
+          <GridColumn field="impactLevel" title="impactLevel" />
+          <GridColumn field="address" title="address" />
+          <GridColumn field="location" title="location" />
+          <GridColumn field="state" title="state" />
+          <GridColumn field="zipCode" title="zipCode" />
+          <GridColumn field="latitude" title="latitude" />
+          <GridColumn field="longitude" title="longitude" />
+          <GridColumn field="timedate" title="timedate" />
+          <GridColumn field="updatedAt" title="updatedAt" />
+          <GridColumn field="userName" title="userName" />
+        </Grid>
+        );
+               
+                              
+                {/* <td><a href={report.data.imageURL}>
                   <img src={report.data.imageURL} alt={report.data.imageURL} className="imgClss"></img>
                   <div className ="dropdown-content">
                     <img src={report.data.imageURL} alt={report.data.imageURL} width="300" height="200"></img>
                   </div>
-                </a></td>
-                <td>{report.data.impactLevel}</td>
-                <td>{report.data.address}</td>
-                <td>{report.data.location}</td>
-                <td>{report.data.state}</td>
-                <td>{report.data.zipCode}</td>
-                <td>{report.data.latitude}</td>
-                <td>{report.data.longitude}</td>
-                <td>{report.data.notes}</td>
-                <td>{report.data.timedate}</td>
-                <td>{report.data.updatedAt}</td>
-                <td>{report.data.userName}</td>
-              </tr>
-
-            ))}
-
-
-          </tbody>
-        </table>
+                </a></td> */}
+     
       </div>
     </div>
 

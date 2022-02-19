@@ -4,7 +4,7 @@ function Layout() {
     return (
 
         <div>
-            <ul>
+            <ul className='ulLayout'>
                 <li><a href="/Dashboard">Home</a></li>
                 <li><a href="/Report">Reports</a></li>
                 <li><a href="/incidentreport">Report Incident</a></li>

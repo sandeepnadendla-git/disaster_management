@@ -2,7 +2,7 @@ body{
     background-color: white !important;
 }
 
-ul {
+ul.ulLayout {
     list-style-type: none;
     margin: 0;
     padding: 0;
