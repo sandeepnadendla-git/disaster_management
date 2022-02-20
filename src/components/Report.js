@@ -44,29 +44,29 @@ function Report() {
           filter={filter}
           onFilterChange={(e) => setFilter(e.filter)}
         >
-          <GridColumn field="title"  minWidth="1000px" title="title" />
+          <GridColumn field="title"  minWidth="1000px" title="Title" />
 
-          <GridColumn field="lastName" title="lastName" />
-          <GridColumn field="incidentId" title="incidentId" />
-          <GridColumn field="typeOfIncident" title="typeOfIncident" />
-          <GridColumn field="description" title="streetAddress" />
-          <GridColumn field="red" title="red" />
-          <GridColumn field="yellow" title="yellow" />
-          <GridColumn field="black" title="black" />
-          <GridColumn field="green" title="green" />
-          <GridColumn field="hazmatType" title="hazmatType" />
-          <GridColumn field="structuralDamageImpact" title="structuralDamageImpact" />
+          <GridColumn field="lastName" title="Last Name" />
+          <GridColumn field="incidentId" title="Incident ID" />
+          <GridColumn field="typeOfIncident" title="Type Of Incident" />
+          <GridColumn field="description" title="Description" />
+          <GridColumn field="red" title="Red" />
+          <GridColumn field="yellow" title="Yellow" />
+          <GridColumn field="black" title="Black" />
+          <GridColumn field="green" title="Green" />
+          <GridColumn field="hazmatType" title="Hazmat Type" />
+          <GridColumn field="structuralDamageImpact" title="Structural Damage Level" />
           {/* <GridColumn field="none" title="none" /> */}
-          <GridColumn field="impactLevel" title="impactLevel" />
-          <GridColumn field="address" title="address" />
-          <GridColumn field="location" title="location" />
-          <GridColumn field="state" title="state" />
-          <GridColumn field="zipCode" title="zipCode" />
-          <GridColumn field="latitude" title="latitude" />
-          <GridColumn field="longitude" title="longitude" />
-          <GridColumn field="timedate" title="timedate" />
-          <GridColumn field="updatedAt" title="updatedAt" />
-          <GridColumn field="userName" title="userName" />
+          <GridColumn field="impactLevel" title="Impact Level" />
+          <GridColumn field="address" title="Address" />
+          <GridColumn field="location" title="Location" />
+          <GridColumn field="state" title="State" />
+          <GridColumn field="zipCode" title="Zipcode" />
+          <GridColumn field="latitude" title="Latitude" />
+          <GridColumn field="longitude" title="Longitude" />
+          <GridColumn field="timedate" title="Date" />
+          <GridColumn field="updatedAt" title="UpdatedAt" />
+          <GridColumn field="userName" title="User Name" />
         </Grid>
         );
                
