@@ -52,6 +52,7 @@ function saveIncident(e) {
     try {
         const docRef = addDoc(collection(analytics, "reportsDB"), incidentInfo);
         alert("Report added successfully");
+        window.location.reload();
     } catch (e) {
         alert("Error adding document: ", e);
     }

@@ -43,6 +43,7 @@ function saveIncident(e) {
         try {
             const docRef = addDoc(collection(analytics, "usersDB"), usersInfo);
             alert("Users added successfully");
+            window.location.reload();
         } catch (e) {
             alert("Error adding document: ", e);
         }
