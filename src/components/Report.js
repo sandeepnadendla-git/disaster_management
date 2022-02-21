@@ -6,6 +6,7 @@ import { analytics } from '../firebase'
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { filterBy } from "@progress/kendo-data-query";
 import '@progress/kendo-theme-default/dist/all.css';
+import moment from 'moment'
 
 
 
@@ -70,8 +71,22 @@ function Report() {
           <GridColumn field="zipCode" title="Zipcode" />
           <GridColumn field="latitude" title="Latitude" />
           <GridColumn field="longitude" title="Longitude" />
-          <GridColumn field="timedate" title="Date" />
-          <GridColumn field="updatedAt" title="UpdatedAt" />
+          <GridColumn field="timedate" title="Date" cell={props => (
+            <td>
+              
+               {moment(props.dataItem[props.field]).format("LLL")}
+             
+            </td>
+
+          )} />
+          <GridColumn field="updatedAt" title="UpdatedAt" cell={props => (
+            <td>
+              
+               {moment(props.dataItem[props.field]).format("LLL")}
+             
+            </td>
+
+          )}/>
           <GridColumn field="userName" title="User Name" />
         </Grid>
         );
