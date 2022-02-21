@@ -46,7 +46,6 @@ function Report() {
         >
           <GridColumn field="title" minWidth="1000px" title="Title" />
 
-          <GridColumn field="lastName" title="Last Name" />
           <GridColumn field="incidentId" title="Incident ID" />
           <GridColumn field="typeOfIncident" title="Type Of Incident" />
           <GridColumn field="description" title="Description" />

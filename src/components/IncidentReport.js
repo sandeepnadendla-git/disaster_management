@@ -22,6 +22,8 @@ function saveIncident(e) {
     //  alert("Incident Reported Sucessfully");
     const incidentInfo = {
         userName: "sandeep",
+        incidentId: "123",
+        title: document.getElementById('title').value,
         address: document.getElementById('address').value,
         location: document.getElementById('city').value,
         state: document.getElementById('state').value,
@@ -39,7 +41,11 @@ function saveIncident(e) {
         hazmatType: document.querySelector('input[name="hz"]:checked').value,
         notes: document.getElementById('other').value,
         timedate: Timestamp.now().toDate().toString(),
-        updatedAt: Timestamp.now().toDate().toString()
+        updatedAt: Timestamp.now().toDate().toString(),
+        impactLevel: document.querySelector('input[name="il"]:checked').value,
+        typeOfIncident: document.getElementById('typeOfIncident').value,
+
+        
     }
 
 
@@ -107,6 +113,21 @@ function IncidentReport() {
                 <h2 className='headingPage'> Report Incident</h2>
                 <Container className='ContainerOuter'>
                     <form onSubmit={saveIncident} autoComplete='off'>
+                    <fieldset class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <legend class="col-form-label col-sm-4 pt-0">Report Title:<span className="rt">*</span> </legend>
+                                    <input class="form-control col-form col-sm-6" type="text" id="title" required />
+                                </div>
+                                <div class="col-sm-5">
+                                    <legend class="col-form-label col-sm-4 pt-0">UserName:<span className="un">*</span> </legend>
+                                    <input class="form-control col-form col-sm-6" type="text" id="userName" required />
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+
                         <fieldset class="form-group mb-3">
                             <div class="row">
                                 <div class="col-sm-5">
@@ -145,6 +166,30 @@ function IncidentReport() {
                                 </div>
                             </div>
                         </fieldset>
+
+                        <fieldset class="form-group mb-3">
+                            <div class="row">
+                            
+                                <div class="col-sm-10">
+                                    <legend class="col-form-label col-sm-4 pt-0">Type of Incident:<span className="toi">*</span></legend>
+                                    <input class="form-control" list="datalistOptions" id="typeOfIncident" placeholder="Type to search..."></input>
+                                    <datalist id="datalistOptions">
+                                    <option value="Earthquakes"></option>
+                                    <option value="Floods"></option>
+                                    <option value="Tornadoes"></option>
+                                    <option value="Severe Storms"></option>
+                                    <option value="Tropical Storms"></option>
+                                    <option value="Thunderstorms"></option>
+                                    <option value="Tropical cyclone"></option>
+                                    <option value="Hailstorms"></option>
+                                    <option value="Others"></option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
@@ -190,6 +235,23 @@ function IncidentReport() {
                             </div>
                         </fieldset>
 
+                        <fieldset class="form-group mb-3">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-3 pt-0">Impact Level: </legend>
+                                <div class="form-check col-sm-2 ">
+                                    <input class="form-check-input" type="radio" name="il" id="impact_level1" value="high" />
+                                    <label class="form-check-label" for="struct_damage1">HIGH</label>
+                                </div>
+                                <div class="form-check col-sm-2">
+                                    <input class="form-check-input" type="radio" name="il" id="impact_level2" value="medium" />
+                                    <label class="form-check-label" for="struct_damage2">MEDIUM</label>
+                                </div>
+                                <div class="form-check col-sm-2">
+                                    <input class="form-check-input" type="radio" name="il" id="impact_level3" value="low" />
+                                    <label class="form-check-label" for="struct_damage3">LOW</label>
+                                </div>
+                            </div>
+                        </fieldset>
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
