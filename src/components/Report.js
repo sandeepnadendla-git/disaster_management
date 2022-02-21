@@ -34,9 +34,9 @@ function Report() {
     <div>
       <Layout></Layout>
       <div className='outerDivTable'>
-      <Grid
+        <Grid
           style={{
-            height: "525px",
+            height: "450px",
             width: "5000px",
           }}
           data={filterBy(reportsDB, filter)}
@@ -44,7 +44,7 @@ function Report() {
           filter={filter}
           onFilterChange={(e) => setFilter(e.filter)}
         >
-          <GridColumn field="title"  minWidth="1000px" title="Title" />
+          <GridColumn field="title" minWidth="1000px" title="Title" />
 
           <GridColumn field="lastName" title="Last Name" />
           <GridColumn field="incidentId" title="Incident ID" />
@@ -56,7 +56,14 @@ function Report() {
           <GridColumn field="green" title="Green" />
           <GridColumn field="hazmatType" title="Hazmat Type" />
           <GridColumn field="structuralDamageImpact" title="Structural Damage Level" />
-          {/* <GridColumn field="none" title="none" /> */}
+          <GridColumn field="imageURL" title="Image" cell={props => (
+            <td>
+              <a href={props.dataItem[props.field]}>
+                <img src={props.dataItem[props.field]} alt={props.dataItem[props.field]} className="imgClss"></img>
+              </a>
+            </td>
+
+          )} />
           <GridColumn field="impactLevel" title="Impact Level" />
           <GridColumn field="address" title="Address" />
           <GridColumn field="location" title="Location" />
@@ -69,15 +76,15 @@ function Report() {
           <GridColumn field="userName" title="User Name" />
         </Grid>
         );
-               
-                              
-                {/* <td><a href={report.data.imageURL}>
+
+
+        {/* <td><a href={report.data.imageURL}>
                   <img src={report.data.imageURL} alt={report.data.imageURL} className="imgClss"></img>
                   <div className ="dropdown-content">
                     <img src={report.data.imageURL} alt={report.data.imageURL} width="300" height="200"></img>
                   </div>
                 </a></td> */}
-     
+
       </div>
     </div>
 
