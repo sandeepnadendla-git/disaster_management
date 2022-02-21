@@ -29,20 +29,17 @@ ul.ulLayout {
     color : white;
   }
 
-  .main-nav-active{
-    color : tomato;
-    
-
-  }
+  .main-nav-active a {
+    color: #110f0f !important;
+    background: #6fe2d7;
+    border-radius: 50%;
+}
 
   .a{
     background-color: red;
   }
   
-  li a:hover:not(.active) {
-    background-color: #111;
-    color : green
-  }
+  
   
   .li1 a:hover {
     background-color: green;
