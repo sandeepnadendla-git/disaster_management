@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import "../css/RegisterVolunteer.css";
 import Container from 'react-bootstrap/Container';
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
@@ -65,7 +66,10 @@ function RegisterVolunteer() {
 
 
     console.log(state);
-    return (
+
+    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+
+        return (
         <div>
             <Layout></Layout>
             <div className="outCSS">
@@ -163,7 +167,12 @@ function RegisterVolunteer() {
                 </Container>
             </div>
         </div>
-    )
+    )}
+    else{
+        return (
+            <Redirect to='/login' />
+           );
+    }
 }
 
 export default RegisterVolunteer

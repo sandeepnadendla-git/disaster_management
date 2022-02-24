@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
 import { collection, addDoc, Firestore, setDoc, Timestamp } from "firebase/firestore";
@@ -97,6 +98,8 @@ function IncidentReport() {
             });
     }
     console.log(state);
+    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+
     return (
         <div>
             <Layout></Layout>
@@ -338,7 +341,12 @@ function IncidentReport() {
                 Launch demo modal
             </Button>
         </div>
-    )
+    )}
+    else{
+        return (
+            <Redirect to='/login' />
+           );
+    }
 }
 
 export default IncidentReport

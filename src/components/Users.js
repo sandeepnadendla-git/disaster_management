@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from "react-router-dom";
 //import '../css/report.css'
 import Layout from './Layout'
 import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
@@ -30,57 +31,60 @@ function Users() {
     })
   }, [])
 
-  return (
-    <div>
-      <Layout></Layout>
-      <div className='outerDivTable'>
+  if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+    return (
+      <div>
+        <Layout></Layout>
+        <div className='outerDivTable'>
 
-        <Grid
-          style={{
-            height: "525px",
-          }}
-          data={filterBy(usersDB, filter)}
-          filterable={true}
-          filter={filter}
-          onFilterChange={(e) => setFilter(e.filter)}
-        >
-          <GridColumn field="firstName" title="firstName" />
+          <Grid
+            style={{
+              height: "525px",
+            }}
+            data={filterBy(usersDB, filter)}
+            filterable={true}
+            filter={filter}
+            onFilterChange={(e) => setFilter(e.filter)}
+          >
+            <GridColumn field="firstName" title="firstName" />
 
-          <GridColumn field="lastName" title="lastName" />
-          <GridColumn field="emailAddress" title="emailAddress" />
-          <GridColumn field="contactNumber" title="contactNumber" />
-          <GridColumn field="streetAddress" title="streetAddress" />
-        </Grid>
-        );
+            <GridColumn field="lastName" title="lastName" />
+            <GridColumn field="emailAddress" title="emailAddress" />
+            <GridColumn field="contactNumber" title="contactNumber" />
+            <GridColumn field="streetAddress" title="streetAddress" />
+          </Grid>
+          );
 
-        {/* </thead>
-          <tbody id='Jdata'>
-            {usersDB.map((users) => (
-              <tr>
-                <td>{users.data.firstName}</td>
-                <td>{users.data.lastName}</td>
-                <td>{users.data.emailAddress}</td>
-                <td>{users.data.contactNumber}</td>
-                <td>{users.data.streetAddress}</td>
-                <td>{users.data.city}</td>
-                <td>{users.data.state}</td>
-                <td>{users.data.zipCode}</td>
-                <td>{users.data.qualification}</td>
-                <td>{users.data.role}</td>
-              </tr>
+          {/* </thead>
+            <tbody id='Jdata'>
+              {usersDB.map((users) => (
+                <tr>
+                  <td>{users.data.firstName}</td>
+                  <td>{users.data.lastName}</td>
+                  <td>{users.data.emailAddress}</td>
+                  <td>{users.data.contactNumber}</td>
+                  <td>{users.data.streetAddress}</td>
+                  <td>{users.data.city}</td>
+                  <td>{users.data.state}</td>
+                  <td>{users.data.zipCode}</td>
+                  <td>{users.data.qualification}</td>
+                  <td>{users.data.role}</td>
+                </tr>
 
-            ))}
+              ))}
 
 
-          </tbody>
-        </table> */}
+            </tbody>
+          </table> */}
+        </div>
       </div>
-    </div>
-
-
-
-
-  )
+    )
+  }
+  else{
+    return (
+        <Redirect to='/login' />
+       );
+  } 
 }
 
 export default Users

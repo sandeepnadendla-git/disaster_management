@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from "react-router-dom";
 import '../css/report.css'
 import Layout from './Layout'
 import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
@@ -31,81 +32,84 @@ function Report() {
     })
   }, [])
 
-  return (
-    <div>
-      <Layout></Layout>
-      <div className='outerDivTable'>
-        <Grid
-          style={{
-            height: "450px",
-            width: "5000px",
-          }}
-          data={filterBy(reportsDB, filter)}
-          filterable={true}
-          filter={filter}
-          onFilterChange={(e) => setFilter(e.filter)}
-        >
-          <GridColumn field="title" minWidth="1000px" title="Title" />
+  if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+    return (
+      <div>
+        <Layout></Layout>
+        <div className='outerDivTable'>
+          <Grid
+            style={{
+              height: "450px",
+              width: "5000px",
+            }}
+            data={filterBy(reportsDB, filter)}
+            filterable={true}
+            filter={filter}
+            onFilterChange={(e) => setFilter(e.filter)}
+          >
+            <GridColumn field="title" minWidth="1000px" title="Title" />
 
-          <GridColumn field="incidentId" title="Incident ID" />
-          <GridColumn field="typeOfIncident" title="Type Of Incident" />
-          <GridColumn field="description" title="Description" />
-          <GridColumn field="red" title="Red" />
-          <GridColumn field="yellow" title="Yellow" />
-          <GridColumn field="black" title="Black" />
-          <GridColumn field="green" title="Green" />
-          <GridColumn field="hazmatType" title="Hazmat Type" />
-          <GridColumn field="structuralDamageImpact" title="Structural Damage Level" />
-          <GridColumn field="imageURL" title="Image" cell={props => (
-            <td>
-              <a href={props.dataItem[props.field]}>
-                <img src={props.dataItem[props.field]} alt={props.dataItem[props.field]} className="imgClss"></img>
-              </a>
-            </td>
+            <GridColumn field="incidentId" title="Incident ID" />
+            <GridColumn field="typeOfIncident" title="Type Of Incident" />
+            <GridColumn field="description" title="Description" />
+            <GridColumn field="red" title="Red" />
+            <GridColumn field="yellow" title="Yellow" />
+            <GridColumn field="black" title="Black" />
+            <GridColumn field="green" title="Green" />
+            <GridColumn field="hazmatType" title="Hazmat Type" />
+            <GridColumn field="structuralDamageImpact" title="Structural Damage Level" />
+            <GridColumn field="imageURL" title="Image" cell={props => (
+              <td>
+                <a href={props.dataItem[props.field]}>
+                  <img src={props.dataItem[props.field]} alt={props.dataItem[props.field]} className="imgClss"></img>
+                </a>
+              </td>
 
-          )} />
-          <GridColumn field="impactLevel" title="Impact Level" />
-          <GridColumn field="address" title="Address" />
-          <GridColumn field="location" title="Location" />
-          <GridColumn field="state" title="State" />
-          <GridColumn field="zipCode" title="Zipcode" />
-          <GridColumn field="latitude" title="Latitude" />
-          <GridColumn field="longitude" title="Longitude" />
-          <GridColumn field="timedate" title="Date" cell={props => (
-            <td>
+            )} />
+            <GridColumn field="impactLevel" title="Impact Level" />
+            <GridColumn field="address" title="Address" />
+            <GridColumn field="location" title="Location" />
+            <GridColumn field="state" title="State" />
+            <GridColumn field="zipCode" title="Zipcode" />
+            <GridColumn field="latitude" title="Latitude" />
+            <GridColumn field="longitude" title="Longitude" />
+            <GridColumn field="timedate" title="Date" cell={props => (
+              <td>
+                
+                {moment(props.dataItem[props.field]).format("LLL")}
               
-               {moment(props.dataItem[props.field]).format("LLL")}
-             
-            </td>
+              </td>
 
-          )} />
-          <GridColumn field="updatedAt" title="UpdatedAt" cell={props => (
-            <td>
+            )} />
+            <GridColumn field="updatedAt" title="UpdatedAt" cell={props => (
+              <td>
+                
+                {moment(props.dataItem[props.field]).format("LLL")}
               
-               {moment(props.dataItem[props.field]).format("LLL")}
-             
-            </td>
+              </td>
 
-          )}/>
-          <GridColumn field="userName" title="User Name" />
-        </Grid>
-        );
+            )}/>
+            <GridColumn field="userName" title="User Name" />
+          </Grid>
+          );
 
 
-        {/* <td><a href={report.data.imageURL}>
-                  <img src={report.data.imageURL} alt={report.data.imageURL} className="imgClss"></img>
-                  <div className ="dropdown-content">
-                    <img src={report.data.imageURL} alt={report.data.imageURL} width="300" height="200"></img>
-                  </div>
-                </a></td> */}
+          {/* <td><a href={report.data.imageURL}>
+                    <img src={report.data.imageURL} alt={report.data.imageURL} className="imgClss"></img>
+                    <div className ="dropdown-content">
+                      <img src={report.data.imageURL} alt={report.data.imageURL} width="300" height="200"></img>
+                    </div>
+                  </a></td> */}
 
+        </div>
       </div>
-    </div>
-
-
-
-
-  )
+    )
+  }
+  else{
+    return (
+        <Redirect to='/login' />
+       );
+}
 }
 
 export default Report

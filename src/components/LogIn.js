@@ -15,7 +15,7 @@ class LogIn extends Component {
       error: '',
     };
 
-
+    document.cookie="ls=0";
 
     this.handlePassChange = this.handlePassChange.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
@@ -42,10 +42,13 @@ class LogIn extends Component {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        document.cookie="ls=1";
+        console.log(document.cookie);
         this.props.history.push('/dashboard');
         // ...
       })
       .catch((error) => {
+        document.cookie="ls=0";
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(error.message);
