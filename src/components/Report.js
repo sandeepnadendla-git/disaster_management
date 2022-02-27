@@ -6,6 +6,7 @@ import { analytics } from '../firebase'
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { filterBy } from "@progress/kendo-data-query";
 import '@progress/kendo-theme-default/dist/all.css';
+import { DatePicker } from "@progress/kendo-react-dateinputs";
 import moment from 'moment'
 
 

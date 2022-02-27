@@ -216,22 +216,22 @@ function IncidentReport() {
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
-                                <label class="col-form-label col-sm-3 pt-0">Casuality: </label>
+                                <label class="col-form-label col-sm-3 pt-0">Casualities in Num: </label>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Green</label>
-                                    <input class="form-control" type="number" id="casualitygreen" />
+                                    <input class="form-control" type="number" id="casualitygreen" value={0} />
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Yellow</label>
-                                    <input class="form-control" type="number" id="casualityyellow" />
+                                    <input class="form-control" type="number" id="casualityyellow" value={0} />
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Red</label>
-                                    <input class="form-control" type="number" id="casualityred" />
+                                    <input class="form-control" type="number" id="casualityred" value={0} />
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Black</label>
-                                    <input class="form-control" type="number" id="casualityblack" />
+                                    <input class="form-control" type="number" id="casualityblack" value={0} />
                                 </div>
                             </div>
                         </fieldset>
