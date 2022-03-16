@@ -98,7 +98,6 @@ function IncidentReport() {
             });
     }
     console.log(state);
-    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
 
     return (
         <div>
@@ -341,12 +340,7 @@ function IncidentReport() {
                 Launch demo modal
             </Button>
         </div>
-    )}
-    else{
-        return (
-            <Redirect to='/login' />
-           );
-    }
+    )
 }
 
 export default IncidentReport

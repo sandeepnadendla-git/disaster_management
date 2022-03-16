@@ -31,7 +31,7 @@ function Users() {
     })
   }, [])
 
-  if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+
     return (
       <div>
         <Layout></Layout>
@@ -79,12 +79,7 @@ function Users() {
         </div>
       </div>
     )
-  }
-  else{
-    return (
-        <Redirect to='/login' />
-       );
-  } 
+  
 }
 
 export default Users

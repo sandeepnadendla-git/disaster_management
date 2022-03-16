@@ -1,7 +1,10 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import { Redirect } from "react-router-dom"
+
 function Layout() {
-    return (
+    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
+      return (
 
         <div>
             <ul className='ulLayout'>
@@ -16,6 +19,15 @@ function Layout() {
         </div>
 
     )
-}
+      }
+    else{
+      
+      //const navigateTo = () => history.push('/login');//eg.history.push('/login');
+      return (
+        <Redirect to='/login' />
+       );
+    }
+  }
+
 
 export default Layout

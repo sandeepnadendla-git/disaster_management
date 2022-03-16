@@ -67,9 +67,7 @@ function RegisterVolunteer() {
 
     console.log(state);
 
-    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
-
-        return (
+    return (
         <div>
             <Layout></Layout>
             <div className="outCSS">
@@ -167,12 +165,7 @@ function RegisterVolunteer() {
                 </Container>
             </div>
         </div>
-    )}
-    else{
-        return (
-            <Redirect to='/login' />
-           );
-    }
+    )
 }
 
 export default RegisterVolunteer
