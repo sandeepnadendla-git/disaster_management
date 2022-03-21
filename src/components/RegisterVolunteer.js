@@ -37,7 +37,7 @@ function saveIncident(e) {
             repeatPassword:document.getElementById('ChkPass').value,
             qualification: document.getElementById('Qualification').value,
             createdAt: Timestamp.now().toDate().toString(),
-            role: 'Volunteer'
+            role: document.getElementById('useRole').value
         }
 
 
@@ -142,7 +142,7 @@ function RegisterVolunteer() {
                         <fieldset class="form-group mb-3">
                             <div class="row">
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-5">
                                     <legend class="col-form-label col-sm-4 pt-0">Qualification:<span className="impFld">*</span></legend>
                                     <input class="form-control" list="datalistOptions" id="Qualification" placeholder="Type to search..."></input>
                                     <datalist id="datalistOptions">
@@ -155,6 +155,15 @@ function RegisterVolunteer() {
                                         <option value="CERT Trained"></option>
                                         <option value="Law Inforcement"></option>
                                         <option value="Others"></option>
+                                    </datalist>
+                                </div>
+                                <div class="col-sm-5">
+                                    <legend class="col-form-label col-sm-6 pt-0">User role:<span className="impFld">*</span> </legend>
+                                    <input class="form-control" list="roles" id="useRole" placeholder="User Role..."></input>
+                                    <datalist id="roles">
+                                        <option value="Volunteer"></option>
+                                        <option value="Super User"></option>
+                                        <option value="Admin"></option>
                                     </datalist>
                                 </div>
                             </div>
