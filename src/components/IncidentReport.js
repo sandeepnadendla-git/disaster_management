@@ -45,7 +45,7 @@ function saveIncident(e) {
         updatedAt: Timestamp.now().toDate().toString(),
         impactLevel: document.querySelector('input[name="il"]:checked').value,
         typeOfIncident: document.getElementById('typeOfIncident').value,
-
+        isActive: true
         
     }
 
