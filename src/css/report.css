@@ -22,3 +22,34 @@ th.k-header {
   background: #2b2b4e;
   color: white;
 }
+
+#incTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#incTable td, #incTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#incTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#incTable tr:hover {background-color: #ddd;}
+
+#incTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+#text-right {
+  float: right;
+  padding: 10px;
+}
+#text-right span{
+  padding: 10px;
+}
