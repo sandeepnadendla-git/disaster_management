@@ -46,12 +46,13 @@ function Users() {
             filter={filter}
             onFilterChange={(e) => setFilter(e.filter)}
           >
-            <GridColumn field="firstName" title="firstName" />
-
-            <GridColumn field="lastName" title="lastName" />
-            <GridColumn field="emailAddress" title="emailAddress" />
-            <GridColumn field="contactNumber" title="contactNumber" />
-            <GridColumn field="streetAddress" title="streetAddress" />
+            <GridColumn field="firstName" title="FirstName" />
+            <GridColumn field="lastName" title="LastName" />
+            <GridColumn field="emailAddress" title="Email Address" />
+            <GridColumn field="contactNumber" title="Contact Number" />
+            <GridColumn field="city" title="City" />
+            <GridColumn field="state" title="State" />
+            <GridColumn field="role" title="User Role" />
           </Grid>
           );
 

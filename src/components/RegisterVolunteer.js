@@ -37,7 +37,7 @@ function saveIncident(e) {
             repeatPassword:document.getElementById('ChkPass').value,
             qualification: document.getElementById('Qualification').value,
             createdAt: Timestamp.now().toDate().toString(),
-            role: document.getElementById('useRole').value
+            role: document.getElementById('userRole').value
         }
 
 
@@ -159,8 +159,8 @@ function RegisterVolunteer() {
                                 </div>
                                 <div class="col-sm-5">
                                     <legend class="col-form-label col-sm-6 pt-0">User role:<span className="impFld">*</span> </legend>
-                                    <input class="form-control" list="roles" id="useRole" placeholder="User Role..."></input>
-                                    <datalist id="roles">
+                                    <input class="form-control" list="role" id="userRole" placeholder="User Role..."></input>
+                                    <datalist id="role">
                                         <option value="Volunteer"></option>
                                         <option value="Super User"></option>
                                         <option value="Admin"></option>
