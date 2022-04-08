@@ -6,6 +6,7 @@ import { analytics } from '../firebase';
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { Button } from 'react-bootstrap';
 import { filterBy } from "@progress/kendo-data-query";
+import { DropdownFilterCell } from "./dropdownFilterCell";
 import '@progress/kendo-theme-default/dist/all.css';
 import moment from 'moment';
 import { Window,Dialog, DialogActionsBar } from "@progress/kendo-react-dialogs";
@@ -27,10 +28,12 @@ function Report() {
   const [reportsDB, setReports] = useState([])
   var [rowData, setRowData] = useState([])
   var [indexID, setIndexID] = useState([])
+  const typeOfIncidentfilt = [ "Earthquakes" , "Floods" ,   "Tornadoes" ,   "Severe Storms" ,   "Tropical Storms" ,   "Thunderstorms" ,
+   "Tropical cyclone" ,   "Hailstorms" ,   "Others" ,]
   useEffect(() => {
     const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'))
     onSnapshot(q, (querySnapshot) => {
-      setReports(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+      setReports(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })))     
     })
   }, [])
 
@@ -64,7 +67,13 @@ function Report() {
     setIndexID(row.id);
     setVisibleWindow(!visibleWindow);
   }
-
+  const typeOfIncidentfiltCell = (props) => (
+    <DropdownFilterCell
+      {...props}
+      data={typeOfIncidentfilt}
+      defaultItem={"Select category"}
+    />
+  );
   return (
       <div>
         <Layout></Layout>
@@ -91,8 +100,8 @@ function Report() {
             <GridColumn field="title" minWidth="1000px" title="Title" />
 
             <GridColumn field="incidentId" title="Incident ID" />
-            <GridColumn field="typeOfIncident" title="Type Of Incident" />
-            <GridColumn field="description" title="Description" />
+            <GridColumn field="typeOfIncident" title="Type Of Incident"  filterCell={typeOfIncidentfiltCell} />
+            <GridColumn field="description" title="Description"/>
             <GridColumn field="isActive" width="100px" title="Is Active ?" />
             <GridColumn field="location" title="Location" />
             <GridColumn field="state" title="State" />

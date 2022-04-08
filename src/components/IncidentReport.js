@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
@@ -15,10 +15,7 @@ const apiBaseUrl = "https://disaster-backend.herokuapp.com/";
 
 
 
-const { useState } = React;
-
-
-function saveIncident(e) {
+async function saveIncident(e) {
     e.preventDefault();
     //  alert("Incident Reported Sucessfully");
     const incidentInfo = {
@@ -45,18 +42,24 @@ function saveIncident(e) {
         updatedAt: Timestamp.now().toDate().toString(),
         impactLevel: document.querySelector('input[name="il"]:checked').value,
         typeOfIncident: document.getElementById('typeOfIncident').value,
-        isActive: true
+      //  isActive: true
         
     }
 
-
-    try {
-        const docRef = addDoc(collection(analytics, "reportsDB"), incidentInfo);
+        try{
+            const docRef = await addDoc(collection(analytics, "reportsDB"), incidentInfo);
         alert("Report added successfully");
+        Layout.temp=0;
         window.location.reload();
+
+        
     } catch (e) {
         alert("Error adding document: ", e);
     }
+
+
+   
+      
 
 }
 
@@ -67,7 +70,12 @@ function close() {
 
 
 function IncidentReport() {
-
+    useEffect(() => {
+        document.getElementById('casualitygreen').value=0
+       document.getElementById('casualityyellow').value=0
+       document.getElementById('casualityred').value=0
+       document.getElementById('casualityblack').value=0
+        })
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -82,7 +90,7 @@ function IncidentReport() {
         const metadata = {
             contentType: 'image/jpeg',
         };
-
+      
         uploadBytesResumable(storageRef, image, metadata)
             .then((snapshot) => {
                 console.log('Uploaded', snapshot.totalBytes, 'bytes.');
@@ -221,19 +229,19 @@ function IncidentReport() {
                                 <label class="col-form-label col-sm-3 pt-0">Casualities in Num: </label>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Green</label>
-                                    <input class="form-control" type="number" id="casualitygreen" value={0} />
+                                    <input class="form-control" type="number" id="casualitygreen" />
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Yellow</label>
-                                    <input class="form-control" type="number" id="casualityyellow" value={0} />
+                                    <input class="form-control" type="number" id="casualityyellow"/>
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Red</label>
-                                    <input class="form-control" type="number" id="casualityred" value={0} />
+                                    <input class="form-control" type="number" id="casualityred"/>
                                 </div>
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label" for="casuality1">Black</label>
-                                    <input class="form-control" type="number" id="casualityblack" value={0} />                                
+                                    <input class="form-control" type="number" id="casualityblack"/>                                
                                 </div>
                             </div>
                         </fieldset>

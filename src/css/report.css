@@ -53,3 +53,9 @@ th.k-header {
 #text-right span{
   padding: 10px;
 }
+.k-filtercell-operator button {
+  display: none;
+}
+button.k-button.k-button-md.k-button-rectangle.k-button-solid.k-button-solid-base.k-rounded-md.k-icon-button{
+  display: none;
+}
