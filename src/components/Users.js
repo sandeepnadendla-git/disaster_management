@@ -128,7 +128,7 @@ function Users() {
             onFilterChange={(e) => setFilter(e.filter)}
           >
             
-            <GridColumn field="apprStatus" width="150px" title="Approval"/>
+            {/* <GridColumn field="apprStatus" width="150px" title="Approval"/> */}
 
             <GridColumn field="close" width="120px" title="Approve User" filterable={false} cell={props => (
               <td>

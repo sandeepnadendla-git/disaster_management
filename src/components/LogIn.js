@@ -44,7 +44,7 @@ class LogIn extends Component {
         const user = userCredential.user;
         document.cookie="ls=1";
         console.log(document.cookie);
-        this.props.history.push('/Report');
+        this.props.history.push('/dashboard');
         // ...
       })
       .catch((error) => {
