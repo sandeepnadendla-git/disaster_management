@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { analytics } from '../firebase';
+import { Redirect } from "react-router-dom"
 import { collection, query, orderBy, onSnapshot, getFirestore } from "@firebase/firestore";
 //import useSound from 'use-sound';
 import url from '../Sounds/Notification.mp3'
@@ -29,6 +30,7 @@ const useAudio = url => {
 
 
 function Layout() {
+    
     const [playing, toggle] = useAudio(url);
     const [audio] = useState(new Audio(url));
 
@@ -56,6 +58,7 @@ function Layout() {
             }
         })
     }, [])
+    if(document.cookie.split("; ").find(row => row.startsWith('ls=')).split("=")[1]=="1"){
 
     return (
 
@@ -71,9 +74,17 @@ function Layout() {
             </ul>
             <button id='NotificationHideBtn' onClick={toggle}>{playing ? "Pause" : "Play"}</button>
         </div>
-
+  
 
     )
+  }
+  else{
+
+    //const navigateTo = () => history.push('/login');//eg.history.push('/login');
+    return (
+      <Redirect to='/login' />
+     );
+  }
 }
 
 export default Layout
