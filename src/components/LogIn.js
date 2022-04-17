@@ -41,9 +41,11 @@ class LogIn extends Component {
     signInWithEmailAndPassword(auth, user2.email, user2.password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
-        document.cookie="ls=1";
-        console.log(document.cookie);
+        document.cookie = "ls=1";
+        console.log(userCredential);
+        const user = userCredential.user.firstName != null ? userCredential.user.firstName : userCredential.user.email;
+        localStorage.setItem("userDetails", JSON.stringify(user));
+        console.log(user);
         this.props.history.push('/dashboard');
         // ...
       })
