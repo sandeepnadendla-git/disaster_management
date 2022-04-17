@@ -1,13 +1,12 @@
 .outCSS{
-    margin: 10%;
-    width: 80%;
     background-color:#ededed;
-    padding: 5%;
-    border-radius: 3%;
+    border-radius: 1%;
 }
 .headingPage{
     text-align: center;
-    border: 1px dashed;
+    color: white;
+    background-color: #2b2b4e;
+    font-size: x-large;
 }
 .impFld{
 	color: red;
@@ -18,5 +17,9 @@ button#modalBtnhide.btn.btn-primary {
     display: none;
 }
 .ContainerOuter{
-    margin-left : 10% !important;
+    float: center;
+}
+
+.btn-primary{
+    width:400px;
 }
