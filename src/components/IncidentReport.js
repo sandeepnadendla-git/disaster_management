@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
 import { collection, addDoc, Firestore, setDoc, Timestamp } from "firebase/firestore";
 import "../css/IncidentReport.css"
-import axios from "axios"
 import Layout from './Layout';
 import { analytics } from '../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, getMetadata } from "firebase/storage";
@@ -57,10 +55,6 @@ async function saveIncident(e) {
         alert("Error adding document: ", e);
     }
 
-
-   
-      
-
 }
 
 function close() {
@@ -110,18 +104,8 @@ function IncidentReport() {
     return (
         <div>
             <Layout></Layout>
-
-            {/* /*<div className="outCSS"> 
-        <Container>
-            <label>Email:</label>
-           <input className="form-control" name="Email" type="email"></input>
-        </Container>
-
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>*/ }
             <div className="outCSS">
-
-                <h2 className='headingPage'> Report Incident</h2>
+            <h2 className='headingPage'> Report Incident</h2>
                 <Container className='ContainerOuter'>
                     <form onSubmit={saveIncident} autoComplete='off'>
                     <fieldset class="form-group mb-3">
@@ -217,7 +201,7 @@ function IncidentReport() {
                                 <div class="form-check col-sm-7">
                                     <div>
                                         <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
-                                        <button onClick={upload}>Upload</button>
+                                        {/* <button class="btn-primary" onClick={upload}>Upload</button> */}
                                     </div>
 
                                 </div>
