@@ -1,125 +1,136 @@
 import React, { useState, useEffect } from 'react'
 import "../css/Dashboard.css";
 import { analytics } from '../firebase';
-import { collection, query, orderBy, onSnapshot, limit, getFirestore } from "@firebase/firestore";
-import { Redirect } from "react-router-dom";
+import { collection, query, orderBy, onSnapshot, limit, where } from "@firebase/firestore";
+import Layout from './Layout';
+import '../css/report.css';
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
+import { filterBy } from "@progress/kendo-data-query";
+import '@progress/kendo-theme-default/dist/all.css';
+import moment from 'moment';
 
 function Dashboard() {
+  const user = JSON.parse(localStorage.getItem('userDetails'));
+  console.log(user);
+
   const [reportsDB, setReports] = useState([])
   useEffect(() => {
-    const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'), limit(3))
+    const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'), limit(10));
     onSnapshot(q, (querySnapshot) => {
       setReports(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })));
     })
-  }, [])
-  if (reportsDB.length!=0) {
+  }, []);
+  const [reportCount, setCounts] = useState([])
+  useEffect(() => {
+    const q = query(collection(analytics, 'reportsDB'), orderBy('timedate', 'desc'));
+    onSnapshot(q, (querySnapshot) => {
+      setCounts(querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })));
+    })
+  }, []);
+
+  const activeCount = reportCount.filter(e => e.isActive == true).length;
+  const closedCount = reportCount.filter(e => e.isActive != true).length;
+
+  var stateReport = [];
+  reportCount.forEach(x => {
+      if (stateReport.some((val) => { return val['state'] == x['state'] })) {
+        stateReport.forEach((k) => {
+          if (k['state'] === x['state']) {
+            k["count"]++
+          }
+        })
+      } else {
+        let a = {}
+        a['state'] = x['state']
+        a["count"] = 1
+        stateReport.push(a);
+      } 
+  })
+
+  var colorCount = {
+    'Red': 0,
+    'Yellow': 0,
+    'Black': 0,
+    'Green': 0,
+  };
+  reportCount.forEach(color => {
+      if(color['red'] != "") {
+        colorCount['Red'] = colorCount['Red'] + parseInt(color['red']);
+      }
+      if(color['black'] != "") {
+        colorCount['Black'] = colorCount['Black'] + parseInt(color['black']);
+      }   
+      if(color['yellow'] != "") {
+        colorCount['Yellow'] = colorCount['Yellow'] + parseInt(color['yellow']);
+      }   
+      if(color['green'] != "") {
+        colorCount['Green'] = colorCount['Green'] + parseInt(color['green']);
+      }         
+  });
+
+  if (reportsDB.length != 0) {
     return (
       <div className='dash'>
-        {/* <Layout></Layout> */}
-
-        <div class="container">
+        <div class="container1">
           <div class="header-wrapper">
             <div class="logo"></div>
-            <ul class="nav1">
-              <li><a href="/report">Reports</a></li>
-              <li><a href="/IncidentReport">Report Incident</a></li>
-              <li><a href="/RegisterVolunteer">Register Volunteer</a></li>
-              <li><a href="/users">users</a></li>
-              <li><a href="/login">Log Out</a></li>
-            </ul>
-            <div class="title">Welcome back, Admin!</div>
-            <div class="note"> <span class="focus">CERT WEB Application </span></div>
-
-
+            <Layout></Layout>
+            <div class="title">Welcome back, {user}!</div>
+            <div class="note"> <span class="focus">CERT WEB Application</span></div>
+            <div class="stats">
+              <table>
+                <tr>
+                  <td>Active Incidents </td>
+                  <td>: {activeCount}</td>
+                </tr>
+                <tr>
+                  <td>Closed Incidents </td>
+                  <td>: {closedCount}</td>
+                </tr>
+              </table>
+            </div>
+            <div class="colorStatsDiv">
+              <table class="colorStats">
+                <tr>
+                  <td class="default">Total Casualities :</td>
+                  <td class="red">Red</td>
+                  <td class="red">{colorCount['Red']}</td>
+                  <td class="yellow">Yellow</td>
+                  <td class="yellow">{colorCount['Yellow']}</td>
+                  <td class="black">Black</td>
+                  <td class="black">{colorCount['Black']}</td>
+                  <td class="green">Green</td>
+                  <td class="green">{colorCount['Green']}</td>
+                </tr>
+              </table>
+            </div>
           </div>
-
-          <div class="content-wrapper">
-            <div class="table-wrapper">
-              <ul class="horizontal col header">
-                <li class="content">Payoff Date</li>
-                <li class="content">Payee</li>
-                <li class="content ">Description</li>
-                <li class="content right">Remaining</li>
-              </ul>
-              <ul class="data col horizontal">
-                <li class="content">
-                  <div>{reportsDB[0].title}</div>
-                  <div class="secondary">4 months</div>
-                </li>
-                <li class="content has-image">
-                  <div>Best Buy</div>
-                  <div class="secondary">Best Buy, LLC.</div>
-                </li>
-                <li class="content">
-                  <div>Washer & Dryer</div>
-                  <div class="secondary">Promotional Exp: 10/20/17</div>
-                </li>
-                <li class="content">
-                  <div>$250</div>
-                  <div class="secondary">2%</div>
-                </li>
-                <li class="content">
-                  <div class="icon-wrapper">
-                    <span class="icon edit" data-tooltip="Edit"></span><span class="icon delete" data-tooltip="Delete"></span></div>
-
-                </li>
-              </ul>
-              <ul class="data col horizontal">
-                <li class="content">
-                  <div>{reportsDB[1].title}</div>
-                  <div class="secondary">6 months</div>
-                </li>
-                <li class="content has-image">
-                  <div>Chase Auto</div>
-                  <div class="secondary">JP Morgan Chase Bank</div>
-                </li>
-                <li class="content">
-                  <div>Scion TC '12</div>
-                  <div class="secondary">5 year loan</div>
-                </li>
-                <li class="content">
-                  <div>$8,9120</div>
-                  <div class="secondary">80%</div>
-                </li>
-                <li class="content">
-                  <div class="icon-wrapper">
-                    <span class="icon edit" data-tooltip="Edit"></span><span class="icon delete" data-tooltip="Delete"></span></div>
-
-                </li>
-              </ul>
-              <ul class="data col horizontal">
-                <li class="content">
-                  <div>{reportsDB[2].title}</div>
-                  <div class="secondary">8 months</div>
-                </li>
-                <li class="content has-image">
-                  <div>Macy's</div>
-                  <div class="secondary">Macy's Inc.</div>
-                </li>
-                <li class="content">
-                  <div>Couch</div>
-                  <div class="secondary">Promotional Exp: 3/8/17</div>
-                </li>
-                <li class="content">
-                  <div>$1,080</div>
-                  <div class="secondary">19%</div>
-                </li>
-                <li class="content">
-
-                  <div class="icon-wrapper">
-                    <span class="icon edit" data-tooltip="Edit"></span><span class="icon delete" data-tooltip="Delete"></span></div>
-
-
-                </li>
-              </ul>
+          <div class="grid-container">
+            <div class="recentReports grid-child">
+              <h5>Most Recent Incidents</h5>
+              <Grid data={filterBy(reportsDB)}>
+                <GridColumn field="title" title="Title" />
+                <GridColumn field="location" title="Location" />
+                <GridColumn field="timedate" title="Report Date"
+                  cell={props => (
+                    <td>  {moment(props.dataItem[props.field]).format("LLL")} </td>
+                  )} />
+              </Grid>
+            </div>
+            <div class="recentReports grid-child">
+              <h5>Incidents count by State</h5>
+              <Grid data={filterBy(stateReport)}>
+                <GridColumn field="state" title="State" />
+                <GridColumn field="count" title="Count" />
+              </Grid>
             </div>
           </div>
         </div>
       </div>
     )
   }
-  else{
-    return(
+  else {
+    return (
       <div></div>
     )
   }
