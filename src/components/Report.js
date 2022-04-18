@@ -74,10 +74,10 @@ function Report() {
         <Layout></Layout>
         <div className='outerDivTable'>
           <Grid
-            //style={{
-              //height: "450px",
-              //width: "1000px",
-            //}</div></div>}
+           style={{
+            height: "525px",
+          }}
+          
             data={filterBy(reportsDB, filter)}
             filterable={true}
             filter={filter}
@@ -97,7 +97,7 @@ function Report() {
             <GridColumn field="incidentId" title="Incident ID" />
             <GridColumn field="typeOfIncident" title="Type Of Incident"  filterCell={typeOfIncidentfiltCell} />
             <GridColumn field="description" title="Description"/>
-            <GridColumn field="isActive" width="100px" title="Is Active ?" />
+            {/* <GridColumn field="isActive" width="100px" title="Is Active ?" /> */}
             <GridColumn field="location" title="Location" />
             <GridColumn field="state" title="State" />
             {/* <GridColumn field="red" title="Red" />
@@ -215,10 +215,10 @@ function Report() {
                   <td><b>Description</b></td>
                   <td><span>{rowData.description}</span></td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td><b>Is Active?</b></td>
                   <td><span>{rowData.isActive + ""}</span></td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td><b>Red</b></td>
                   <td><span>{rowData.red}</span></td>
