@@ -1,11 +1,13 @@
 .outCSS{
+    margin: 10%;
+    width: 80%;
     background-color:#ededed;
-    border-radius: 1%;
+    padding: 5%;
+    border-radius: 6%;
 }
-.headingPage{
+.headingPage {
     text-align: center;
     color: white;
-    background-color: #2b2b4e;
     font-size: x-large;
 }
 .impFld{
