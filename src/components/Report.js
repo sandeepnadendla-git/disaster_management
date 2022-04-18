@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/report.css';
 import Layout from './Layout';
-import { collection, query, orderBy, onSnapshot, getFirestore } from "firebase/firestore"
+import { collection, query, orderBy, onSnapshot, doc, updateDoc } from "firebase/firestore"
 import { analytics } from '../firebase';
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { Button } from 'react-bootstrap';
@@ -41,24 +41,19 @@ function Report() {
   const [visible, setVisible] = React.useState(false);
   const [visibleWindow, setVisibleWindow] = React.useState(false);
 
-  function updateIncStatus() {
-    reportsDB.forEach(
-      (e) => { 
-        if(e.id === indexID){
-          e.isActive = false;
-        }
-      }
-      );
-      if(rowData.id === indexID){
-        var row = rowData;
-        row.isActive = false;
-        setRowData({ ...row });
-      }
-      setVisible(!visible);
+  async function updateIncStatus() {
+    console.log(indexID);
+    const userDoc = doc(analytics, "reportsDB", indexID);
+    const newFields = { isActive: 0 };
+   await  updateDoc(userDoc, newFields);
+   setVisible(!visible)
   }
 
-  function closeIncident(id) {
-    setIndexID(id);
+   function closeIncident(id) {
+    console.log(id)
+    
+   
+   setIndexID(id);
     setVisible(!visible);
   }
 
