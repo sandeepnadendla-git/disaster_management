@@ -148,8 +148,8 @@ function Report() {
             <GridColumn field="userName" title="User Name" />
             <GridColumn field="close" width="120px" title="Close Incident" filterable={false} cell={props => (
               <td>
-                <Button variant="danger" id="close" disabled={!props.dataItem.isActive} onClick={() => closeIncident(props.dataItem.id)} >
-                {props.dataItem.isActive ? "Close" : "Closed"}
+                <Button variant="danger" id="close" disabled={props.dataItem.isActive==0} onClick={() => closeIncident(props.dataItem.id)} >
+                {props.dataItem.isActive==0 ? "Closed" : "Close"}
                 </Button>
               </td>
               )} 

@@ -28,8 +28,8 @@ function Dashboard() {
     })
   }, []);
 
-  const activeCount = reportCount.filter(e => e.isActive == true).length;
-  const closedCount = reportCount.filter(e => e.isActive != true).length;
+  const activeCount = reportCount.filter(e => e.isActive == 1).length;
+  const closedCount = reportCount.filter(e => e.isActive == 0).length;
 
   var stateReport = [];
   reportCount.forEach(x => {
