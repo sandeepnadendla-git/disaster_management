@@ -28,7 +28,7 @@ function Dashboard() {
     })
   }, []);
 
-  const activeCount = reportCount.filter(e => e.isActive == 1).length;
+  const activeCount = reportCount.filter(e => e.isActive != 0).length;
   const closedCount = reportCount.filter(e => e.isActive == 0).length;
 
   var stateReport = [];
