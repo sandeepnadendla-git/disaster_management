@@ -40,7 +40,7 @@ async function saveIncident(e) {
         updatedAt: Timestamp.now().toDate().toString(),
         impactLevel: document.querySelector('input[name="il"]:checked').value,
         typeOfIncident: document.getElementById('typeOfIncident').value,
-      //  isActive: true
+        isActive: 1
         
     }
 
@@ -195,18 +195,18 @@ function IncidentReport() {
                             </div>
                         </fieldset>
 
-                        <fieldset class="form-group mb-3">
+                        {/* <fieldset class="form-group mb-3">
                             <div class="row">
                                 <legend class="col-form-label col-sm-3 pt-0">Choose file:</legend>
                                 <div class="form-check col-sm-7">
                                     <div>
-                                        <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
+                                        <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} /> */}
                                         {/* <button class="btn-primary" onClick={upload}>Upload</button> */}
-                                    </div>
+                                    {/* </div>
 
                                 </div>
                             </div>
-                        </fieldset>
+                        </fieldset> */}
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
@@ -313,7 +313,7 @@ function IncidentReport() {
                         </fieldset>
 
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary btnCss">Submit</button>
                     </form>
                 </Container>
             </div>

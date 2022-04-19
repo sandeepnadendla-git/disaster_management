@@ -1,5 +1,5 @@
 .outCSS{
-    margin: 10%;
+    margin: 1% 10% 10% 10%;
     width: 80%;
     background-color:#ededed;
     padding: 5%;
@@ -25,4 +25,7 @@ button#modalBtnhide.btn.btn-primary {
 .container{
     width:80%;
     max-width: 80%;
+}
+.btnCss{
+    margin: 0% 1% 0% 30%;
 }
