@@ -49,9 +49,9 @@ function Layout() {
                 document.getElementById("NotificationHideBtn").click();
                 
                 if (querySnapshot.size != count) {
-                 alert("A new incident has been reported");
+                audio.play();                 
+                  alert("A new incident has been reported");
                  count = querySnapshot.size;
-                audio.play();
                  
                 }
 

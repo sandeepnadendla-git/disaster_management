@@ -111,11 +111,11 @@ function IncidentReport() {
                     <fieldset class="form-group mb-3">
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <legend class="col-form-label col-sm-4 pt-0">Report Title:<span className="rt">*</span> </legend>
+                                    <legend class="col-form-label col-sm-4 pt-0">Report Title:<span className="impFld">*</span> </legend>
                                     <input class="form-control col-form col-sm-6" type="text" id="title" required />
                                 </div>
                                 <div class="col-sm-5">
-                                    <legend class="col-form-label col-sm-4 pt-0">UserName:<span className="un">*</span> </legend>
+                                    <legend class="col-form-label col-sm-4 pt-0">UserName:<span className="impFld">*</span> </legend>
                                     <input class="form-control col-form col-sm-6" type="text" id="userName" required />
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ function IncidentReport() {
                             <div class="row">
                             
                                 <div class="col-sm-10">
-                                    <legend class="col-form-label col-sm-4 pt-0">Type of Incident:<span className="toi">*</span></legend>
+                                    <legend class="col-form-label col-sm-4 pt-0">Type of Incident:<span className="impFld">*</span></legend>
                                     <input class="form-control" list="datalistOptions" id="typeOfIncident" placeholder="Type to search..."></input>
                                     <datalist id="datalistOptions">
                                     <option value="Earthquakes"></option>
@@ -232,7 +232,7 @@ function IncidentReport() {
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
-                                <legend class="col-form-label col-sm-3 pt-0">Impact Level: </legend>
+                                <legend class="col-form-label col-sm-3 pt-0">Impact Level: <span className="impFld">*</span></legend>
                                 <div class="form-check col-sm-2 ">
                                     <input class="form-check-input" type="radio" name="il" id="impact_level1" value="high" />
                                     <label class="form-check-label" for="struct_damage1">HIGH</label>
@@ -250,7 +250,7 @@ function IncidentReport() {
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
-                                <legend class="col-form-label col-sm-3 pt-0">Structural Damage: </legend>
+                                <legend class="col-form-label col-sm-3 pt-0">Structural Damage:<span className="impFld">*</span> </legend>
                                 <div class="form-check col-sm-2 ">
                                     <input class="form-check-input" type="radio" name="sdm" id="struct_damage1" value="high" />
                                     <label class="form-check-label" for="struct_damage1">HIGH</label>
@@ -268,7 +268,7 @@ function IncidentReport() {
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
-                                <legend class="col-form-label col-sm-3 pt-0">Fire: </legend>
+                                <legend class="col-form-label col-sm-3 pt-0">Fire:<span className="impFld">*</span> </legend>
                                 <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" name="fire" id="fire1" value="major" />
                                     <label class="form-check-label" for="fire1">Major</label>
@@ -287,7 +287,7 @@ function IncidentReport() {
 
                         <fieldset class="form-group mb-3">
                             <div class="row">
-                                <legend class="col-form-label col-sm-3 pt-0">HAZMAT: </legend>
+                                <legend class="col-form-label col-sm-3 pt-0">HAZMAT:<span className="impFld">*</span> </legend>
                                 <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" name="hz" id="hazmat1" value="gas" />
                                     <label class="form-check-label" for="hazmat1">Gas</label>
