@@ -70,6 +70,7 @@ function Layout() {
                 <NavLink exact to="/incidentreport" className="main-Nav" activeClassName="main-nav-active"><li><a>Report Incident</a></li></NavLink>
                 <NavLink exact to="/RegisterVolunteer" className="main-Nav" activeClassName="main-nav-active"><li ><a>Register Volunteer</a></li></NavLink>
                 <NavLink exact to="/users" className="main-Nav" activeClassName="main-nav-active"><li><a href="/users">Users</a></li></NavLink>
+               <li><a  href="https://web.whatsapp.com/" target="_blank">Chat</a></li>
                 <li style={{ float: 'right' }}><a class="active" href="/login">Log Out</a></li>
             </ul>
             <button id='NotificationHideBtn' onClick={toggle}>{playing ? "Pause" : "Play"}</button>
